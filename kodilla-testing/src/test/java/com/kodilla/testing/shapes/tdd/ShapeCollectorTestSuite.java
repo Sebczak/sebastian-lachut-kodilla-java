@@ -90,7 +90,7 @@ public class ShapeCollectorTestSuite {
     class TestRectangle {
 
         @Test
-        void testCircleAndField() {
+        void testRectangleAndField() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
             Rectangle rectangle = new Rectangle(3, 4);
@@ -153,7 +153,7 @@ public class ShapeCollectorTestSuite {
     class TestTriangle {
 
         @Test
-        void testCircleAndField() {
+        void testTriangleAndField() {
             //Given
             ShapeCollector shapeCollector = new ShapeCollector();
             Triangle triangle = new Triangle(3, 4);
