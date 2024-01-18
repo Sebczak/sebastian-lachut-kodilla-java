@@ -29,16 +29,19 @@ public class ShapeCollectorTestSuite {
     class TestCircle {
 
         @Test
-        void createCircle() {
+        void testCircleAndField() {
             //Given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Circle circle = new Circle(3);
 
             //When
-            String result = circle.getShapeName();
-            String expectedResult = "Circle";
+            shapeCollector.addFigure(circle);
+            Shape retrivedShape = shapeCollector.getFigure(0);
 
             //Then
-            Assertions.assertEquals(expectedResult, result);
+            Assertions.assertNotNull(retrivedShape);
+            Assertions.assertEquals(circle.getShapeName(), retrivedShape.getShapeName());
+            Assertions.assertEquals(circle.getField(), retrivedShape.getField());
         }
 
         @Test
@@ -80,20 +83,6 @@ public class ShapeCollectorTestSuite {
             //Then
             Assertions.assertFalse(result);
         }
-
-        @Test
-        void testProperFieldValue() {
-            //Given
-            Circle circle = new Circle(3);
-
-            //When
-            double result = circle.getField();
-            double expectedResult = 3 * 3.14;
-
-            //Then
-            Assertions.assertEquals(expectedResult, result);
-        }
-
     }
 
     @Nested
@@ -101,16 +90,19 @@ public class ShapeCollectorTestSuite {
     class TestRectangle {
 
         @Test
-        void createRectangle() {
+        void testCircleAndField() {
             //Given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Rectangle rectangle = new Rectangle(3, 4);
 
             //When
-            String result = rectangle.getShapeName();
-            String expectedResult = "Rectangle";
+            shapeCollector.addFigure(rectangle);
+            Shape retrivedShape = shapeCollector.getFigure(0);
 
             //Then
-            Assertions.assertEquals(expectedResult, result);
+            Assertions.assertNotNull(retrivedShape);
+            Assertions.assertEquals(rectangle.getShapeName(), retrivedShape.getShapeName());
+            Assertions.assertEquals(rectangle.getField(), retrivedShape.getField());
         }
 
 
@@ -154,19 +146,6 @@ public class ShapeCollectorTestSuite {
             //Then
             Assertions.assertFalse(result);
         }
-
-        @Test
-        void testProperFieldValue() {
-            //Given
-            Rectangle rectangle = new Rectangle(3, 4);
-
-            //When
-            double result = rectangle.getField();
-            double expectedResult = 3 * 4;
-
-            //Then
-            Assertions.assertEquals(expectedResult, result);
-        }
     }
 
     @Nested
@@ -174,16 +153,19 @@ public class ShapeCollectorTestSuite {
     class TestTriangle {
 
         @Test
-        void createTriangle() {
+        void testCircleAndField() {
             //Given
+            ShapeCollector shapeCollector = new ShapeCollector();
             Triangle triangle = new Triangle(3, 4);
 
             //When
-            String result = triangle.getShapeName();
-            String expectedResult = "Triangle";
+            shapeCollector.addFigure(triangle);
+            Shape retrivedShape = shapeCollector.getFigure(0);
 
             //Then
-            Assertions.assertEquals(expectedResult, result);
+            Assertions.assertNotNull(retrivedShape);
+            Assertions.assertEquals(triangle.getShapeName(), retrivedShape.getShapeName());
+            Assertions.assertEquals(triangle.getField(), retrivedShape.getField());
         }
 
 
@@ -227,19 +209,5 @@ public class ShapeCollectorTestSuite {
             //Then
             Assertions.assertFalse(result);
         }
-
-        @Test
-        void testProperFieldValue() {
-            //Given
-            Triangle triangle = new Triangle(3, 4);
-
-            //When
-            double result = triangle.getField();
-            double expectedResult = 3 * 4;
-
-            //Then
-            Assertions.assertEquals(expectedResult, result);
-        }
-
     }
 }

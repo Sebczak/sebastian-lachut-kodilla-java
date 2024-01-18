@@ -12,19 +12,31 @@ public class ShapeCollector {
     }
 
     public void addFigure(Shape shape) {
+        shapes.add(shape);
 
     }
 
     public boolean removeFigure(Shape shape) {
-        return true;
+        boolean result = false;
+        if (shapes.contains(shape)) {
+            shapes.remove(shape);
+            result = true;
+        }
+        return result;
     }
 
     public Shape getFigure(int n) {
+        if(n >= 0 && n < shapes.size()) {
+            return shapes.get(n);
+        }
 
         return null;
     }
 
     public void showFigures() {
+        for (Shape shape : shapes) {
+            System.out.println("Shape: " + shape.getShapeName() + ", Field: " + shape.getField());
+        }
 
     }
 
