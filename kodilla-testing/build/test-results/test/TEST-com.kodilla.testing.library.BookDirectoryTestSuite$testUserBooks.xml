@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests for User Books" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-01-18T22:42:18" hostname="sebczak-desktop" time="1.63">
+  <properties/>
+  <testcase name="testUserWithFiveBooks()" classname="com.kodilla.testing.library.BookDirectoryTestSuite$testUserBooks" time="1.619"/>
+  <testcase name="testUserWithNoBooks()" classname="com.kodilla.testing.library.BookDirectoryTestSuite$testUserBooks" time="0.004"/>
+  <testcase name="testUserWithOneBook()" classname="com.kodilla.testing.library.BookDirectoryTestSuite$testUserBooks" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
