@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Test for Users" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-19T20:02:58" hostname="sebczak-desktop" time="1.655">
+  <properties/>
+  <testcase name="testZeroUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="1.64"/>
+  <testcase name="testThousandUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
