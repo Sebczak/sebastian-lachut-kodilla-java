@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class StatisticsTestSuite {
     @BeforeEach
     void setUp() {
         statisticsCalculation = new StatisticsCalculation(statisticsMock);
+        when(statisticsMock.usersNames()).thenReturn(List.of("userexample"));
     }
 
     @Nested
@@ -36,6 +38,8 @@ public class StatisticsTestSuite {
         void testZeroPosts() {
             //Given
             when(statisticsMock.postsCount()).thenReturn(0);
+            when(statisticsMock.usersNames()).thenReturn(List.of("user1"));
+
 
             //When
             statisticsCalculation.calculateAdvStatistics(statisticsMock);
@@ -47,7 +51,6 @@ public class StatisticsTestSuite {
         @Test
         void testThousandPosts() {
             //Given
-            System.out.println(statisticsMock.postsCount());
             when(statisticsMock.postsCount()).thenReturn(1000);
 
             //When
