@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Test for Users" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-19T20:02:58" hostname="sebczak-desktop" time="1.655">
+<testsuite name="Test for Users" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-21T20:39:50" hostname="sebczak-desktop" time="1.14">
   <properties/>
-  <testcase name="testZeroUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="1.64"/>
-  <testcase name="testThousandUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="0.012"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testZeroUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="1.12"/>
+  <testcase name="testThousandUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="0.016"/>
+  <system-out><![CDATA[No users. Exiting the program
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

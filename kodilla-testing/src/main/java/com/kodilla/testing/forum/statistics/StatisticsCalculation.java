@@ -18,11 +18,16 @@ public class StatisticsCalculation {
         postsCount = statistics.postsCount();
         commentsCount = statistics.commentsCount();
 
-        avgPostsPerUser = (double) postsCount / usersCount;
-        avgCommentsPerUser = (double) commentsCount / usersCount;
+        if (usersCount != 0 ) {
 
-        if (postsCount != 0) {
-            avgCommentsPerPost = (double) commentsCount / postsCount;
+            avgPostsPerUser = (double) postsCount / usersCount;
+            avgCommentsPerUser = (double) commentsCount / usersCount;
+
+            if (postsCount != 0) {
+                avgCommentsPerPost = (double) commentsCount / postsCount;
+            }
+        } else {
+            System.out.println("No users. Exiting the program");
         }
     }
 
