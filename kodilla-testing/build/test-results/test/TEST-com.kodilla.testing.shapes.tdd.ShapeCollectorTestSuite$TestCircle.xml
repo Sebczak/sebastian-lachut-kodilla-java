@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Tests for Circle" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-01-23T18:08:36" hostname="sebczak-desktop" time="0.01">
+  <properties/>
+  <testcase name="removeCircle()" classname="com.kodilla.testing.shapes.tdd.ShapeCollectorTestSuite$TestCircle" time="0.001"/>
+  <testcase name="checkCircleInList()" classname="com.kodilla.testing.shapes.tdd.ShapeCollectorTestSuite$TestCircle" time="0.002"/>
+  <testcase name="removeNonExistingCircle()" classname="com.kodilla.testing.shapes.tdd.ShapeCollectorTestSuite$TestCircle" time="0.001"/>
+  <testcase name="testCircleAndField()" classname="com.kodilla.testing.shapes.tdd.ShapeCollectorTestSuite$TestCircle" time="0.001"/>
+  <system-out><![CDATA[Preparing to execute test #9
+Preparing to execute test #10
+Preparing to execute test #11
+Preparing to execute test #12
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

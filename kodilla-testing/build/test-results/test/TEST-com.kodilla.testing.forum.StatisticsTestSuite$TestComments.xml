@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests for Comments" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-01-21T20:39:51" hostname="sebczak-desktop" time="0.043">
+<testsuite name="Tests for Comments" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-01-23T18:08:36" hostname="sebczak-desktop" time="0.026">
   <properties/>
-  <testcase name="testZeroComments()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.008"/>
-  <testcase name="testCommentsLessThanPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.013"/>
-  <testcase name="testCommentsGreaterThanPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.007"/>
-  <testcase name="testThousandComments()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.007"/>
+  <testcase name="testZeroComments()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.004"/>
+  <testcase name="testCommentsLessThanPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.005"/>
+  <testcase name="testCommentsGreaterThanPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.004"/>
+  <testcase name="testThousandComments()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestComments" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
