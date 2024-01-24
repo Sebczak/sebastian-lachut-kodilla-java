@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Tests for Posts" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-23T18:08:36" hostname="sebczak-desktop" time="0.008">
-  <properties/>
-  <testcase name="testZeroPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestPosts" time="0.004"/>
-  <testcase name="testThousandPosts()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestPosts" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
