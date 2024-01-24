@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Collection Test Suite" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-23T18:08:35" hostname="sebczak-desktop" time="0.032">
+<testsuite name="Collection Test Suite" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-24T15:57:42" hostname="sebczak-desktop" time="0.093">
   <properties/>
-  <testcase name="when numbers List is empty then the result should be true" classname="com.kodilla.testing.collection.CollectionTestSuite" time="0.021"/>
-  <testcase name="when exterminate method is used on numbers then returns evenList of numbers" classname="com.kodilla.testing.collection.CollectionTestSuite" time="0.009"/>
+  <testcase name="when numbers List is empty then the result should be true" classname="com.kodilla.testing.collection.CollectionTestSuite" time="0.064"/>
+  <testcase name="when exterminate method is used on numbers then returns evenList of numbers" classname="com.kodilla.testing.collection.CollectionTestSuite" time="0.025"/>
   <system-out><![CDATA[Test Suite: begin
 Test Case: begin
 List is empty[]

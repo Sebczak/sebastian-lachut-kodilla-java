@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Test for Users" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-01-23T18:08:35" hostname="sebczak-desktop" time="1.097">
-  <properties/>
-  <testcase name="testZeroUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="1.082"/>
-  <testcase name="testThousandUsers()" classname="com.kodilla.testing.forum.StatisticsTestSuite$TestUsers" time="0.011"/>
-  <system-out><![CDATA[No users. Exiting the program
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
