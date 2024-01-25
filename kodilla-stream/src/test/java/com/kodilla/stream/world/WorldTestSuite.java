@@ -32,9 +32,9 @@ public class WorldTestSuite {
         world.addContinent(asia);
 
         //When
-        BigDecimal totalPeoples = world.getPeopleQuantity();
+        BigDecimal totalPeople = world.getPeopleQuantity();
 
         //Then
-        assertEquals(new BigDecimal("1400"), totalPeoples);
+        assertEquals(new BigDecimal("1400"), totalPeople);
     }
 }
