@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Game {
     private final String[] choices = {null, "rock", "paper", "scissors", "lizard", "Spock"};
     private int rounds;
-    private int playerScore = 0;
-    private int computerScore = 0;
+    protected int playerScore = 0;
+    protected int computerScore = 0;
 
     public Game(int rounds) {
         this.rounds = rounds;
@@ -46,7 +46,7 @@ public class Game {
 
     }
 
-    private void determineWinner(Player p1, Player p2) {
+    protected void determineWinner(Player p1, Player p2) {
         System.out.println(p1.getUsername() + " chose: " + choices[p1.getChoice()]);
         System.out.println(p2.getUsername() + " chose: " + choices[p2.getChoice()]);
         if (p1.getChoice() == p2.getChoice()) {
@@ -72,7 +72,7 @@ public class Game {
         }
     }
 
-    private void displayGameSummary() {
+    protected void displayGameSummary() {
         System.out.println("Game Summary:");
 
         if (playerScore > computerScore) {
@@ -86,7 +86,7 @@ public class Game {
         System.out.println("Final Score: Player: " + playerScore + " | Computer: " + computerScore);
     }
 
-    private void getPlayerChoice(Player player, Scanner scanner) {
+    protected void getPlayerChoice(Player player, Scanner scanner) {
         System.out.println(player.getUsername() + ", enter your choice(rock, paper, scissors, lizard, Spock)");
         int playerChoice = scanner.nextInt();
 
@@ -97,7 +97,7 @@ public class Game {
         player.setChoice(playerChoice);
     }
 
-    private void getComputerChoice(Player player, Random random) {
+    protected void getComputerChoice(Player player, Random random) {
         int rnd = random.nextInt(100) + 1;
 
         if (rnd <= 25) {
