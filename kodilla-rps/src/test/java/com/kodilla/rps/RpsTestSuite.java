@@ -130,7 +130,7 @@ public class RpsTestSuite {
     }
 
     @Test
-    void test() {
+    void testUserInput() {
         //Given
         String input = "2";
         InputStream in = new ByteArrayInputStream(input.getBytes());
