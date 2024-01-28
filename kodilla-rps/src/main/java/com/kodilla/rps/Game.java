@@ -98,8 +98,14 @@ public class Game {
     }
 
     private void getComputerChoice(Player player, Random random) {
-        int rnd = random.nextInt(1, choices.length);
-        player.setChoice(rnd);
+        int rnd = random.nextInt(100) + 1;
+
+        if (rnd <= 25) {
+            player.setChoice(1);
+        } else if (rnd <= 50) {
+            player.setChoice(2);
+        } else
+        player.setChoice(random.nextInt(choices.length - 3) + 3);
     }
 
     private void resetGame(Scanner scanner) {
