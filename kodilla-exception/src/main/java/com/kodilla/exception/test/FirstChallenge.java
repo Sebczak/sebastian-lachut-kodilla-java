@@ -1,6 +1,6 @@
 package com.kodilla.exception.test;
 
-public class FirstChallange {
+public class FirstChallenge {
 
     public double divide(double a, double b) throws ArithmeticException {
         if (b == 0) {
@@ -28,10 +28,10 @@ public class FirstChallange {
     }
 
     public static void main(String[] args) {
-        FirstChallange firstChallange = new FirstChallange();
+        FirstChallenge firstChallenge = new FirstChallenge();
 
         try {
-            double result = firstChallange.divide(3, 0);
+            double result = firstChallenge.divide(3, 0);
             System.out.println(result);
         } catch (ArithmeticException e) {
             System.out.println("Cannot divide by 0 ");
@@ -39,6 +39,6 @@ public class FirstChallange {
             System.out.println("Stop");
         }
 
-        System.out.println(firstChallange.optionalPow(0,1));
+        System.out.println(firstChallenge.optionalPow(0,1));
     }
 }
