@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RpsTestSuite {
 
+    private final String[] choices = {null, "rock", "paper", "scissors", "lizard", "Spock"};
+
     @Test
     void testUserWins() {
         //Given
@@ -100,7 +102,7 @@ public class RpsTestSuite {
         //When
         for (int i = 1; i < 3; i++) {
             p1.setChoice(i);
-            game.getComputerChoice(com, new Random());
+            com.getComputerChoice(com, choices);
             game.determineWinner(p1, com);
         }
 
@@ -124,7 +126,7 @@ public class RpsTestSuite {
         game.computerScore = 0;
 
         //When
-        game.getPlayerChoice(p1, new java.util.Scanner(System.in));
+        p1.getPlayerChoice(p1);
         //Then
         assertEquals(2, p1.getChoice() );
     }
@@ -141,8 +143,53 @@ public class RpsTestSuite {
         game.computerScore = 0;
 
         //When
-        game.getPlayerChoice(p1, new java.util.Scanner(System.in));
+        p1.getPlayerChoice(p1);
         //Then
         assertEquals(2, p1.getChoice());
+    }
+
+    @Test
+    void testUserInputNAnotherGame() {
+        //Given
+        Game game = new Game();
+        String nInput = "n";
+
+        //When
+        game.playAnotherGameOrExit(nInput);
+
+        //Then
+        assertEquals(0, game.playerScore);
+        assertEquals(0, game.computerScore);
+    }
+
+    @Test
+    void testUserXInputAnotherGame() {
+        //Given
+        Game game = new Game();
+        String xInput = "x";
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        //When
+        game.playAnotherGameOrExit(xInput);
+        System.setOut(System.out);
+
+        //Then
+        assertEquals("Thanks for playing.\n", outContent.toString());
+    }
+
+    @Test
+    void testUserInvalidInputAnotherGame() {
+        //Given
+        Game game = new Game();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        //When
+        game.playAnotherGameOrExit("i");
+        System.setOut(System.out);
+
+        //Then
+        assertEquals("Incorrect input\n", outContent.toString());
     }
 }
