@@ -26,7 +26,7 @@ public class Game {
             Player com = new Player("COM");
 
             while (rounds > 0) {
-                p1.getPlayerChoice1(p1);
+                p1.getPlayerChoice(p1);
                 com.getComputerChoice(com, choices);
                 System.out.println(determineWinner(p1, com));
                 rounds--;

@@ -126,7 +126,7 @@ public class RpsTestSuite {
         game.computerScore = 0;
 
         //When
-        p1.getPlayerChoice1(p1);
+        p1.getPlayerChoice(p1);
         //Then
         assertEquals(2, p1.getChoice() );
     }
@@ -143,7 +143,7 @@ public class RpsTestSuite {
         game.computerScore = 0;
 
         //When
-        p1.getPlayerChoice1(p1);
+        p1.getPlayerChoice(p1);
         //Then
         assertEquals(2, p1.getChoice());
     }

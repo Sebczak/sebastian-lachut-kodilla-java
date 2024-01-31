@@ -14,7 +14,7 @@ public class Player {
         this.username = username;
     }
 
-    public int getPlayerChoice1(Player p1) {
+    public int getPlayerChoice(Player p1) {
         System.out.println(p1.getUsername() + ", enter your choice(rock, paper, scissors, lizard, Spock)\"");
         p1.setChoice(scanner.nextInt());
         return p1.getChoice();
