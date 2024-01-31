@@ -2,6 +2,8 @@ package com.kodilla.exception.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,17 +11,22 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
-    public void readFile() {
+    public void readFile(final String fileName) throws FileReaderException{
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource("names.txt").getFile());
+        URI uri;
 
-        try (Stream<String> fileLines = Files.lines(Paths.get(file.getPath()))) {
+        try {
+           uri = classLoader.getResource(fileName).toURI();
+        } catch (NullPointerException | URISyntaxException e) {
+            throw new FileReaderException();
+        }
+
+        try (Stream<String> fileLines = Files.lines(Path.of(uri))) {
             fileLines.forEach(System.out::println);
         } catch (IOException e) {
-            System.out.println("IO file Error" + e);
-        } finally {
+            throw new FileReaderException();
+        }  finally {
             System.out.println("stop");
         }
-        System.out.println(file.getPath());
     }
 }
