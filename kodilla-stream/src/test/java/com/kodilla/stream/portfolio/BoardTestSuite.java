@@ -113,11 +113,14 @@ public class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
+        List<String> undoneTasks = new ArrayList<>();
+        undoneTasks.add("To do");
+        undoneTasks.add("In progress");
         List<Task> tasks = project.getTaskLists().stream()
-                .filter(ut -> ut.getName().equals("To do") || ut.getName().equals("In progress"))
+                .filter(t -> undoneTasks.contains(t.getName()))
                 .flatMap(tl -> tl.getTasks().stream())
                 .filter(t -> t.getDeadline().isBefore(LocalDate.now()))
-                .toList();
+                .collect(toList());
 
         //Then
         assertEquals(1, tasks.size());
@@ -130,8 +133,10 @@ public class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
-        var longTasks = project.getTaskLists().stream()
-                .filter(inProgressTasks -> inProgressTasks.getName().equals("In progress"))
+        List<String> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add("In progress");
+        long longTasks = project.getTaskLists().stream()
+                .filter(t -> inProgressTasks.contains(t.getName()))
                 .flatMap(tl -> tl.getTasks().stream())
                 .map(Task::getCreated)
                 .filter(d -> d.compareTo(LocalDate.now().minusDays(10)) <= 0)
@@ -147,8 +152,10 @@ public class BoardTestSuite {
         Board project = prepareTestData();
 
         //When
+        List<String> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add("In progress");
         double taskTimeCount = project.getTaskLists().stream()
-                .filter(inProgressTasks -> inProgressTasks.getName().equals("In progress"))
+                .filter(t -> inProgressTasks.contains(t.getName()))
                 .flatMap(tl -> tl.getTasks().stream())
                 .mapToDouble(task -> ChronoUnit.DAYS.between(task.getCreated(), LocalDate.now()))
                 .average()
