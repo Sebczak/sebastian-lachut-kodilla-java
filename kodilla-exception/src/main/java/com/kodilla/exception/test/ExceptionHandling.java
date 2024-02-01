@@ -13,19 +13,19 @@ public class ExceptionHandling {
         try {
             System.out.println(secondChallenge.probablyIWillThrowException(2, 1));
         } catch (Exception e) {
-            System.out.println("X value is at least 2 " + e.getMessage());
+            System.out.println("Exception found");
         }
 
         try {
             System.out.println(secondChallenge.probablyIWillThrowException(-1, 1));
         } catch (Exception e) {
-            System.out.println("X value is lower than 1 " + e.getMessage());
+            System.out.println("Exception found");
         }
 
         try {
             System.out.println(secondChallenge.probablyIWillThrowException(1, 1.5));
         } catch (Exception e) {
-            System.out.println("Y value equals 1.5 " + e.getMessage());
+            System.out.println("Exception found");
         } finally {
             System.out.println("Stop");
         }
@@ -38,13 +38,13 @@ public class ExceptionHandling {
         try {
             flightSearch.findFlight(warsawToCracow);
         } catch (RouteNotFoundException e) {
-            System.out.println("Flight is not available");
+            System.out.println("Exception found");
         }
 
         try {
             flightSearch.findFlight(nairobiToOslo);
         } catch (RouteNotFoundException e) {
-            System.out.println("Flight is not available");
+            System.out.println("Exception found");
         }
 
 
