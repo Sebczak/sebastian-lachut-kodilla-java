@@ -2,7 +2,6 @@ package com.kodilla.exception.test;
 
 public class ExceptionHandling {
 
-
     public static void main(String[] args) {
         SecondChallenge secondChallenge = new SecondChallenge();
         try {
@@ -30,5 +29,24 @@ public class ExceptionHandling {
         } finally {
             System.out.println("Stop");
         }
+
+        Flight warsawToCracow = new Flight("Warsaw", "Cracow");
+        Flight nairobiToOslo = new Flight("Nairobi", "Oslo");
+
+        FlightSearch flightSearch = new FlightSearch();
+
+        try {
+            flightSearch.findFlight(warsawToCracow);
+        } catch (RouteNotFoundException e) {
+            System.out.println("Flight is not available");
+        }
+
+        try {
+            flightSearch.findFlight(nairobiToOslo);
+        } catch (RouteNotFoundException e) {
+            System.out.println("Flight is not available");
+        }
+
+
     }
 }
