@@ -1,102 +1,143 @@
 package com.kodilla.rps;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private final String[] choices = {null, "rock", "paper", "scissors", "lizard", "Spock"};
-    private int rounds;
-    protected int playerScore = 0;
-    protected int computerScore = 0;
+    private final static String[] choices = {"rock", "paper", "scissors", "lizard", "Spock"};
+    private final Player p1;
+    private final Player com;
     private final Scanner scanner = new Scanner(System.in);
-
-    public Game(int rounds) {
-        this.rounds = rounds;
-    }
+    private final Random randomNumber = new Random();
+    private DetermineWinner winner;
 
     public Game() {
+        this.p1 = new Player();
+        this.com = new Player();
     }
 
     public void play() {
-        try {
-            System.out.println("Enter amount of rounds");
-            rounds = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("Enter username");
-            Player p1 = new Player(scanner.next());
-            Player com = new Player("COM");
+        System.out.println("Enter amount of rounds");
+        int roundsLeft;
 
-            while (rounds > 0) {
-                p1.getPlayerChoice(p1);
-                com.getComputerChoice(com, choices);
-                System.out.println(determineWinner(p1, com));
-                rounds--;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                roundsLeft = scanner.nextInt();
+                if (roundsLeft > 0) {
+                    break;
+                } else {
+                    System.out.println("Enter positive number");
+                }
+            } else {
+                System.out.println("Type a number.");
+                scanner.next();
             }
-            System.out.println(displayGameSummary());
-
-            System.out.println("Do you want to play another game? (Press 'n' for new game or 'x' to leave)");
-            scanner.nextLine();
-            playAnotherGameOrExit(scanner.nextLine());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            scanner.close();
         }
+        scanner.nextLine();
+
+        System.out.println("Enter username");
+        String playerUsername = scanner.nextLine();
+        p1.setUsername(playerUsername);
+        com.setUsername("COM");
+
+        while (roundsLeft > 0) {
+            int playerInput = getPlayerChoice(p1);
+            int comInput = getComputerChoice(p1, com);
+
+            winner = new DetermineWinner(p1, com);
+            String result = winner.checkWinner(choices, playerInput, comInput);
+            System.out.println(result);
+
+            roundsLeft--;
+        }
+        int playerScore = p1.getScore();
+        int comScore = com.getScore();
+        System.out.println(displayGameSummary(playerScore, comScore));
+
+        System.out.println("Do you want to play another game? (Press 'n' for new game or 'x' to leave)");
+        scanner.nextLine();
+        playAnotherGameOrExit(scanner.nextLine());
+
+        scanner.close();
     }
 
-    protected String determineWinner(Player p1, Player com) {
-        System.out.println(p1.getUsername() + " chose: " + choices[p1.getChoice()]);
-        System.out.println(com.getUsername() + " chose: " + choices[com.getChoice()]);
-        if (p1.getChoice() == com.getChoice()) {
-            return "Tie\nScore: Player: " + playerScore + " | Computer: " +  computerScore;
-        } else if (
-                p1.getChoice() == 1 && com.getChoice() == 3 ||
-                p1.getChoice() == 1 && com.getChoice() == 4 ||
-                p1.getChoice() == 2 && com.getChoice() == 1 ||
-                p1.getChoice() == 2 && com.getChoice() == 5 ||
-                p1.getChoice() == 3 && com.getChoice() == 2 ||
-                p1.getChoice() == 3 && com.getChoice() == 4 ||
-                p1.getChoice() == 4 && com.getChoice() == 5 ||
-                p1.getChoice() == 4 && com.getChoice() == 2 ||
-                p1.getChoice() == 5 && com.getChoice() == 3 ||
-                p1.getChoice() == 5 && com.getChoice() == 1 ){
-                    playerScore++;
-                    return "Player wins\nScore: Player: " + playerScore + " | Computer: " +  computerScore;
+    public int getPlayerChoice(Player p1) {
+        System.out.println(p1.getUsername() + ", enter your choice(rock, paper, scissors, lizard, Spock)");
+        int playerChoice;
+        while (true) {
+            if (scanner.hasNextInt()) {
+                playerChoice = scanner.nextInt();
+                if (playerChoice <= choices.length) {
+                    break;
+                } else {
+                    System.out.println("You chose wrong number.");
+                }
+            } else {
+                System.out.println("Type a number.");
+                scanner.next();
+            }
+        }
+        p1.setChoice(playerChoice - 1);
+        return p1.getChoice();
+    }
+
+    protected int getComputerChoice(Player p1, Player com) {
+        int playerChoice = p1.getChoice();
+        int rnd = randomNumber.nextInt(100);
+        winner = new DetermineWinner(p1, com);
+        if ( rnd <= 25) {
+            com.setChoice(playerChoice);
+        } else if (rnd <= 50) {
+
+            com.setChoice(winner.getLosingMove(choices, playerChoice));
         } else {
-            computerScore++;
-            return "Computer wins\nScore: Player: " + playerScore + " | Computer: " +  computerScore;
+            com.setChoice(winner.getWinningMove(choices, playerChoice));
         }
+
+        return com.getChoice();
     }
 
-    protected String displayGameSummary() {
+    protected String displayGameSummary(int playerScore, int comScore) {
         System.out.println("Game Summary:");
 
-        if (playerScore > computerScore) {
+        if (playerScore > comScore) {
             System.out.println("Player wins!");
-        } else if (playerScore < computerScore) {
+        } else if (playerScore < comScore) {
             System.out.println("Computer wins!");
         } else {
             System.out.println("It's a tie!");
         }
 
-        return "Final Score: Player: " + playerScore + " | Computer: " + computerScore;
+        return "Final Score: Player: " + playerScore + " | Computer: " + comScore;
     }
 
     protected void playAnotherGameOrExit(String userInput) {
-        char c = userInput.toLowerCase().charAt(0);
+        char c;
 
-        if (c == 'n') {
-            resetGame();
-            play();
-        } else if (c == 'x') {
-            System.out.println("Thanks for playing.");
-        } else {
-            System.out.println("Incorrect input");
-            scanner.next();
+        while (true) {
+            if (userInput.length() == 1) {
+                c = userInput.toLowerCase().charAt(0);
+
+                if (c == 'n') {
+                    resetGame();
+                    play();
+                    break;
+                } else if (c == 'x') {
+                    System.out.println("Thanks for playing.");
+                    break;
+                } else {
+                    System.out.println("Incorrect input. Enter 'n' for a new game or 'x' to leave.");
+                }
+            } else {
+                System.out.println("Invalid input. Enter a single character ('n' or 'x').");
+            }
+
+            userInput = scanner.nextLine();
         }
     }
 
     private void resetGame() {
-        playerScore = 0;
-        computerScore = 0;
+        p1.setScore(0);
+        com.setScore(0);
     }
 }
