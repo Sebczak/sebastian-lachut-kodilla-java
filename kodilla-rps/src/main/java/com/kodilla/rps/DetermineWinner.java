@@ -43,7 +43,7 @@ public class DetermineWinner {
     protected int getWinningMove(String[] choices, int playerChoice) {
         int winningMove = 0;
         while (playerBeatsCom(winningMove, playerChoice)) {
-            winningMove = (winningMove + 1) %choices.length;
+            winningMove = (winningMove + 1) % choices.length;
         }
         return winningMove;
     }
