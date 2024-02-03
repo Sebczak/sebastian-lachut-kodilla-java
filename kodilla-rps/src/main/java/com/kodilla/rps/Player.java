@@ -1,8 +1,5 @@
 package com.kodilla.rps;
 
-import java.util.Random;
-import java.util.Scanner;
-
 public class Player {
 
     private String username;
@@ -12,7 +9,6 @@ public class Player {
     public Player() {
 
     }
-
 
     public String getUsername() {
         return username;
