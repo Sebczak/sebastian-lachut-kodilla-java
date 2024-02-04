@@ -19,7 +19,7 @@ public class FlightSearch {
         String departure = flight.getDepartureAirport();
         String arrival = flight.getArrivalAirport();
 
-        if (airportAvailability.getOrDefault(departure, true) && airportAvailability.getOrDefault(arrival, true)) {
+        if (airportAvailability.get(departure) && airportAvailability.get(arrival)) {
             System.out.println("Flight from: " + departure + " to: " + arrival + " is available");
         } else {
             throw new RouteNotFoundException("Flight from: " + departure + " to: " + arrival + " is not available");
