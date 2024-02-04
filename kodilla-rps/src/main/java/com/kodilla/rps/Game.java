@@ -78,7 +78,7 @@ public class Game {
             }
         }
         p1.setChoice(playerChoice - 1);
-        return p1.getChoice();
+        return playerChoice - 1;
     }
 
     protected int getComputerChoice(Player p1, Player com) {
