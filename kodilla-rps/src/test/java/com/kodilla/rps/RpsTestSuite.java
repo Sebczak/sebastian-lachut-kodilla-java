@@ -3,8 +3,8 @@ package com.kodilla.rps;
 import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import java.io.ByteArrayInputStream;
 import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -71,27 +71,82 @@ public class RpsTestSuite {
 
         @Test
         void testUserChoiceRock() {
+            //Given
+            String playerInput = "1";
+            Player p1 = new Player();
+            ByteArrayInputStream input = new ByteArrayInputStream(playerInput.getBytes());
+            System.setIn(input);
 
+            //When
+            Game game = new Game();
+            int result = game.getPlayerChoice(p1);
+
+            //Then
+            assertEquals(0, result);
         }
 
         @Test
         void testUserChoicePaper() {
+            // Given
+            String playerInput = "2";
+            Player p1 = new Player();
+            ByteArrayInputStream input = new ByteArrayInputStream(playerInput.getBytes());
+            System.setIn(input);
 
+            // When
+            Game game = new Game();
+            int result = game.getPlayerChoice(p1);
+
+            // Then
+            assertEquals(1, result);
         }
 
         @Test
         void testUserChoiceScissors() {
+            // Given
+            String playerInput = "3";
+            Player p1 = new Player();
+            ByteArrayInputStream input = new ByteArrayInputStream(playerInput.getBytes());
+            System.setIn(input);
 
+            // When
+            Game game = new Game();
+            int result = game.getPlayerChoice(p1);
+
+            // Then
+            assertEquals(2, result);
         }
 
         @Test
         void testUserChoiceLizard() {
+            // Given
+            String playerInput = "4";
+            Player p1 = new Player();
+            ByteArrayInputStream input = new ByteArrayInputStream(playerInput.getBytes());
+            System.setIn(input);
 
+            // When
+            Game game = new Game();
+            int result = game.getPlayerChoice(p1);
+
+            // Then
+            assertEquals(3, result);
         }
 
         @Test
         void testUserChoiceSpock() {
+            // Given
+            String playerInput = "5";
+            Player p1 = new Player();
+            ByteArrayInputStream input = new ByteArrayInputStream(playerInput.getBytes());
+            System.setIn(input);
 
+            // When
+            Game game = new Game();
+            int result = game.getPlayerChoice(p1);
+
+            // Then
+            assertEquals(4, result);
         }
     }
 
@@ -118,33 +173,39 @@ public class RpsTestSuite {
 
         @Test
         void testComLossChoice() {
-            //Given
+//            //Given
 //            MockitoAnnotations.openMocks(this);
 //            Player p1 = new Player();
 //            Player com = new Player();
-//            p1.setChoice(1);
+//            p1.setChoice(2);
 //
 //            //When
+//            Game game = new Game();
 //            when(randomNumber.nextInt(100)).thenReturn(50);
-//            game.getComputerChoice(p1, com);
+//            System.out.println(randomNumber.nextInt(100));
+//            int comResult = game.getComputerChoice(p1, com);
 //
 //            //Then
-//            assertNotEquals(p1.getChoice(), com.getChoice());
+//            assertEquals(1, comResult);
         }
 
         @Test
         void testComWinChoice() {
-            //Given
+            //            //Given
 //            MockitoAnnotations.openMocks(this);
 //            Player p1 = new Player();
 //            Player com = new Player();
+//            p1.setChoice(2);
 //
 //            //When
-//            when(randomNumber.nextInt(100)).thenReturn(100);
-//            game.getComputerChoice(p1, com);
+//            Game game = new Game();
+//            when(randomNumber.nextInt(100)).thenReturn(99);
+//            System.out.println(randomNumber.nextInt(100));
+//            int comResult = game.getComputerChoice(p1, com);
 //
 //            //Then
-//            assertNotEquals(p1.getChoice(), com.getChoice());
+//            assertEquals(1, comResult);
+
         }
     }
 
@@ -160,17 +221,28 @@ public class RpsTestSuite {
             //When
             p1.setScore(2);
             com.setScore(1);
-            String result = "Final Score: Player: " + p1.getScore() + " | Computer: " + com.getScore();
+            String expectedResult1 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String result1 = "Final Score: Player: 2 | Computer: 1";
+
+            p1.setScore(1);
+            com.setScore(2);
+            String expectedResult2 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String result2 = "Final Score: Player: 1 | Computer: 2";
+
+            p1.setScore(2);
+            com.setScore(2);
+            String expectedResult3 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String result3 = "Final Score: Player: 2 | Computer: 2";
 
             //Then
-            assertEquals("Final Score: Player: 2 | Computer: 1", result);
+            assertEquals(expectedResult1, result1);
+            assertEquals(expectedResult2, result2);
+            assertEquals(expectedResult3, result3);
 
         }
 
         @Test
         void testPlayAnotherGameOrExit() {
-
-
         }
 
         @Test
