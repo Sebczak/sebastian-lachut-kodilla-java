@@ -9,7 +9,7 @@ public class Game {
     private final Player com;
     private final Scanner scanner = new Scanner(System.in);
     private final Random randomNumber = new Random();
-    private DetermineWinner winner;
+    private WinnerChecker winner;
 
     public Game() {
         this.p1 = new Player();
@@ -41,18 +41,16 @@ public class Game {
         com.setUsername("COM");
 
         while (roundsLeft > 0) {
-            int playerInput = getPlayerChoice(p1);
-            int comInput = getComputerChoice(p1, com);
-
-            winner = new DetermineWinner(p1, com);
-            String result = winner.checkWinner(choices, playerInput, comInput);
+            winner = new WinnerChecker();
+            getPlayerChoice(p1);
+            getComputerChoice(p1, com);
+            String result = String.valueOf(winner.checkWinner(choices,p1,com));
             System.out.println(result);
 
             roundsLeft--;
         }
-        int playerScore = p1.getScore();
-        int comScore = com.getScore();
-        System.out.println(displayGameSummary(playerScore, comScore));
+
+        System.out.println(displayGameSummary(p1, com));
 
         System.out.println("Do you want to play another game? (Press 'n' for new game or 'x' to leave)");
         scanner.nextLine();
@@ -61,7 +59,7 @@ public class Game {
         scanner.close();
     }
 
-    public int getPlayerChoice(Player p1) {
+    public void getPlayerChoice(Player p1) {
         System.out.println(p1.getUsername() + ", enter your choice(rock, paper, scissors, lizard, Spock)");
         int playerChoice;
         while (true) {
@@ -78,37 +76,45 @@ public class Game {
             }
         }
         p1.setChoice(playerChoice - 1);
-        return playerChoice - 1;
     }
 
-    protected int getComputerChoice(Player p1, Player com) {
+    protected void getComputerChoice(Player p1, Player com) {
         int playerChoice = p1.getChoice();
         int rnd = randomNumber.nextInt(100);
-        winner = new DetermineWinner(p1, com);
+        winner = new WinnerChecker();
         if ( rnd <= 25) {
             com.setChoice(playerChoice);
         } else if (rnd <= 50) {
+            int comChoice = randomNumber.nextInt(5);
+            com.setChoice(comChoice);
 
-            com.setChoice(winner.getLosingMove(choices, playerChoice));
         } else {
-            com.setChoice(winner.getWinningMove(choices, playerChoice));
+            Figure playerFigure = winner.getFigureFromIndex(playerChoice);
+            Figure comChoice;
+            do {
+                int randomIndex = randomNumber.nextInt(5);
+                comChoice = winner.getFigureFromIndex(randomIndex);
+            } while (playerFigure.checkIfsWinningAgainst(comChoice));
+            System.out.println(comChoice);
+            //
+            //com.setChoice(winner.getFigureFromIndex(com.getChoice()));
         }
-
-        return com.getChoice();
     }
 
-    protected String displayGameSummary(int playerScore, int comScore) {
+    protected String displayGameSummary(Player p1, Player com) {
         System.out.println("Game Summary:");
 
-        if (playerScore > comScore) {
+        if (p1.getScore() > com.getScore()) {
             System.out.println("Player wins!");
-        } else if (playerScore < comScore) {
+        } else if (p1.getScore() < com.getScore()) {
             System.out.println("Computer wins!");
         } else {
             System.out.println("It's a tie!");
         }
+        Figure f = new Figure("f");
+        System.out.println(f.getWinningAgainst());
 
-        return "Final Score: Player: " + playerScore + " | Computer: " + comScore;
+        return "Final Score: Player: " + p1.getScore() + " | Computer: " + com.getScore();
     }
 
     protected void playAnotherGameOrExit(String userInput) {

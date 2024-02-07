@@ -28,12 +28,12 @@ public class RpsTestSuite {
         @Test
         void testDetermineWinner() {
             //Given
-            DetermineWinner determineWinner = new DetermineWinner(p1, com);
+            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
 
             //When
-            String tieResult = determineWinner.checkWinner(choices,0,0);
-            String playerLossResult = determineWinner.checkWinner(choices,0,1);
-            String playerWinResult = determineWinner.checkWinner(choices,0,2);
+            String tieResult = winnerChecker.checkWinner(choices,0,0);
+            String playerLossResult = winnerChecker.checkWinner(choices,0,1);
+            String playerWinResult = winnerChecker.checkWinner(choices,0,2);
 
             //Then
             assertEquals("It's a tie.", tieResult);
@@ -44,10 +44,10 @@ public class RpsTestSuite {
         @Test
         void testLosingMove() {
             //Given
-            DetermineWinner determineWinner = new DetermineWinner(p1, com);
+            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
 
             //When
-            int result = determineWinner.getLosingMove(choices, 2);
+            int result = winnerChecker.getLosingMove(choices, 2);
 
             //Then
             assertEquals(0, result);
@@ -56,10 +56,10 @@ public class RpsTestSuite {
         @Test
         void testWinningMove() {
             //Given
-            DetermineWinner determineWinner = new DetermineWinner(p1, com);
+            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
 
             //When
-            int result = determineWinner.getWinningMove(choices, 2);
+            int result = winnerChecker.getWinningMove(choices, 2);
 
             //Then
             assertEquals(1, result);
