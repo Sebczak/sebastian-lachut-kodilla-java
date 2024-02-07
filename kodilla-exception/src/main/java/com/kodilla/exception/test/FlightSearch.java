@@ -10,7 +10,7 @@ public class FlightSearch {
         airportAvailability = new HashMap<>();
         airportAvailability.put("Warsaw", true);
         airportAvailability.put("Oslo", false);
-        airportAvailability.put("Nairobi", true);
+        airportAvailability .put("Nairobi", true);
         airportAvailability.put("Barcelona", false);
         airportAvailability.put("Cracow", true);
     }
