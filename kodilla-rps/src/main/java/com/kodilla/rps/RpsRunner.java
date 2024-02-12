@@ -5,6 +5,5 @@ public class RpsRunner {
 
         Game game = new Game();
         game.play();
-
     }
 }

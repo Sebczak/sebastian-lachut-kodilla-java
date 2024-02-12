@@ -8,11 +8,9 @@ public class WinnerChecker {
     private final Figure figureSpock = new Figure("Spock");
 
     public WinnerChecker() {
-        playerBeatsCom();
     }
 
     protected Player checkWinner(String[] choices, Player p1, Player com) {
-        playerBeatsCom();
         Figure playerChoice = getFigureFromIndex(p1.getChoice());
         Figure comChoice = getFigureFromIndex(com.getChoice());
         System.out.println("Player's choice: " + choices[p1.getChoice()]);
