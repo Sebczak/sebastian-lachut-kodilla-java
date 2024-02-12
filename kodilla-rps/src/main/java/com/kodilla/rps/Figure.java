@@ -14,7 +14,7 @@ public class Figure {
     }
 
     public void addWinningAgainstFigure(Figure figure) {
-        winningAgainst.add(figure);
+        this.winningAgainst.add(figure);
     }
 
     public boolean checkIfsWinningAgainst(Figure figure) {
@@ -32,9 +32,5 @@ public class Figure {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    public List<Figure> getWinningAgainst() {
-        return winningAgainst;
     }
 }
