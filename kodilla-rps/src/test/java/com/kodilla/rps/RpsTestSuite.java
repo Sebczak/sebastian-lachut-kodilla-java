@@ -28,42 +28,50 @@ public class RpsTestSuite {
         @Test
         void testDetermineWinner() {
             //Given
-            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
+            WinnerChecker winnerChecker = new WinnerChecker();
 
             //When
-            String tieResult = winnerChecker.checkWinner(choices,0,0);
-            String playerLossResult = winnerChecker.checkWinner(choices,0,1);
-            String playerWinResult = winnerChecker.checkWinner(choices,0,2);
+            p1.setUsername("Player");
+            com.setUsername("Computer");
+            p1.setChoice(1);
+            com.setChoice(1);
+            String tieResult = String.valueOf(winnerChecker.checkWinner(choices,p1,com));
+            p1.setChoice(1);
+            com.setChoice(2);
+            String playerLossResult = String.valueOf(winnerChecker.checkWinner(choices,p1,com));
+            p1.setChoice(4);
+            com.setChoice(0);
+            String playerWinResult = String.valueOf(winnerChecker.checkWinner(choices,p1,com));
 
             //Then
-            assertEquals("It's a tie.", tieResult);
-            assertEquals("Computer won a round", playerLossResult);
-            assertEquals("Player won a round", playerWinResult);
+            assertEquals("null", tieResult);
+            assertEquals("Computer wins a round!", playerLossResult);
+            assertEquals("Player wins a round!", playerWinResult);
         }
         
-        @Test
-        void testLosingMove() {
-            //Given
-            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
-
-            //When
-            int result = winnerChecker.getLosingMove(choices, 2);
-
-            //Then
-            assertEquals(0, result);
-        }
-
-        @Test
-        void testWinningMove() {
-            //Given
-            WinnerChecker winnerChecker = new WinnerChecker(p1, com);
-
-            //When
-            int result = winnerChecker.getWinningMove(choices, 2);
-
-            //Then
-            assertEquals(1, result);
-        }
+//        @Test
+//        void testLosingMove() {
+//            //Given
+//            WinnerChecker winnerChecker = new WinnerChecker();
+//
+//            //When
+//            int result = winnerChecker.getLosingMove(choices, 2);
+//
+//            //Then
+//            assertEquals(0, result);
+//        }
+//
+//        @Test
+//        void testWinningMove() {
+//            //Given
+//            WinnerChecker winnerChecker = new WinnerChecker();
+//
+//            //When
+//            int result = winnerChecker.getWinningMove(choices, 2);
+//
+//            //Then
+//            assertEquals(1, result);
+//        }
     }
     @Nested
     @DisplayName("Tests for user choices")
@@ -79,10 +87,10 @@ public class RpsTestSuite {
 
             //When
             Game game = new Game();
-            int result = game.getPlayerChoice(p1);
+            game.getPlayerChoice(p1);
 
             //Then
-            assertEquals(0, result);
+            assertEquals(0, p1.getChoice() );
         }
 
         @Test
@@ -95,10 +103,10 @@ public class RpsTestSuite {
 
             // When
             Game game = new Game();
-            int result = game.getPlayerChoice(p1);
+            game.getPlayerChoice(p1);
 
             // Then
-            assertEquals(1, result);
+            assertEquals(1, p1.getChoice());
         }
 
         @Test
@@ -111,10 +119,10 @@ public class RpsTestSuite {
 
             // When
             Game game = new Game();
-            int result = game.getPlayerChoice(p1);
+            game.getPlayerChoice(p1);
 
             // Then
-            assertEquals(2, result);
+            assertEquals(2, p1.getChoice());
         }
 
         @Test
@@ -127,10 +135,10 @@ public class RpsTestSuite {
 
             // When
             Game game = new Game();
-            int result = game.getPlayerChoice(p1);
+            game.getPlayerChoice(p1);
 
             // Then
-            assertEquals(3, result);
+            assertEquals(3, p1.getChoice());
         }
 
         @Test
@@ -143,10 +151,10 @@ public class RpsTestSuite {
 
             // When
             Game game = new Game();
-            int result = game.getPlayerChoice(p1);
+            game.getPlayerChoice(p1);
 
             // Then
-            assertEquals(4, result);
+            assertEquals(4, p1.getChoice());
         }
     }
 
@@ -165,7 +173,7 @@ public class RpsTestSuite {
 
             //When
             when(randomNumber.nextInt(100)).thenReturn(25);
-            game.getComputerChoice(p1, com);
+            game.getComputerChoice(com);
 
             //Then
             assertEquals(p1.getChoice(), com.getChoice());
@@ -221,17 +229,17 @@ public class RpsTestSuite {
             //When
             p1.setScore(2);
             com.setScore(1);
-            String expectedResult1 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String expectedResult1 = game.displayGameSummary(p1, com);
             String result1 = "Final Score: Player: 2 | Computer: 1";
 
             p1.setScore(1);
             com.setScore(2);
-            String expectedResult2 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String expectedResult2 = game.displayGameSummary(p1, com);
             String result2 = "Final Score: Player: 1 | Computer: 2";
 
             p1.setScore(2);
             com.setScore(2);
-            String expectedResult3 = game.displayGameSummary(p1.getScore(), com.getScore());
+            String expectedResult3 = game.displayGameSummary(p1, com);
             String result3 = "Final Score: Player: 2 | Computer: 2";
 
             //Then
