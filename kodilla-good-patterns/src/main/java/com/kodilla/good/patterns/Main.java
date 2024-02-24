@@ -1,7 +1,6 @@
 package com.kodilla.good.patterns;
 
-import com.kodilla.good.patterns.challenges.Factorial;
-import com.kodilla.good.patterns.challenges.MovieStore;
+import com.kodilla.good.patterns.challenges.*;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +20,12 @@ public class Main {
                 .toList();
 
         System.out.println(moviesWithExclamationMarkAtTheEnd);
+
+        ProductOrderProcessor productOrderProcessor = new ProductOrderProcessor(
+                 new InformationService(), new OrderService(), new ProductOrderRepository()
+        );
+        BuyRequestRetriever buyRequestRetriever = new BuyRequestRetriever();
+        BuyRequest buyRequest = buyRequestRetriever.retrieve();
+        productOrderProcessor.process(buyRequest);
     }
 }
