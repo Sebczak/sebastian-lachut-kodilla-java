@@ -1,6 +1,10 @@
 package com.kodilla.good.patterns.challenges;
 
-import java.time.LocalDate;
+import com.kodilla.good.patterns.challenges.buy.request.BuyDto;
+import com.kodilla.good.patterns.challenges.buy.request.BuyRequest;
+import com.kodilla.good.patterns.challenges.information.service.InformationService;
+import com.kodilla.good.patterns.challenges.order.repository.ProductOrderRepository;
+import com.kodilla.good.patterns.challenges.order.service.OrderService;
 
 public class ProductOrderProcessor {
 

@@ -1,4 +1,6 @@
-package com.kodilla.good.patterns.challenges;
+package com.kodilla.good.patterns.challenges.buy.request;
+
+import com.kodilla.good.patterns.challenges.User;
 
 public class BuyDto {
 
