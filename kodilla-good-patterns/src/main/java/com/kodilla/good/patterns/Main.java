@@ -1,10 +1,13 @@
 package com.kodilla.good.patterns;
 
 import com.kodilla.good.patterns.challenges.*;
+import com.kodilla.good.patterns.challenges.buy.request.BuyRequest;
+import com.kodilla.good.patterns.challenges.buy.request.BuyRequestRetriever;
+import com.kodilla.good.patterns.challenges.information.service.MailService;
+import com.kodilla.good.patterns.challenges.order.repository.GamesOrderRepository;
+import com.kodilla.good.patterns.challenges.order.service.GamesOrderService;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +25,7 @@ public class Main {
         System.out.println(moviesWithExclamationMarkAtTheEnd);
 
         ProductOrderProcessor productOrderProcessor = new ProductOrderProcessor(
-                 new InformationService(), new OrderService(), new ProductOrderRepository()
+                 new MailService(), new GamesOrderService(), new GamesOrderRepository()
         );
         BuyRequestRetriever buyRequestRetriever = new BuyRequestRetriever();
         BuyRequest buyRequest = buyRequestRetriever.retrieve();
