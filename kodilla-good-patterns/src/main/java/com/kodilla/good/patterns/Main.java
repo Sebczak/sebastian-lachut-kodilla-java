@@ -1,6 +1,12 @@
 package com.kodilla.good.patterns;
 
 import com.kodilla.good.patterns.challenges.*;
+import com.kodilla.good.patterns.challenges.airport.information.AirportFlightInformationService;
+import com.kodilla.good.patterns.challenges.airport.processor.FlightProcessor;
+import com.kodilla.good.patterns.challenges.airport.repository.AirportFlightRepository;
+import com.kodilla.good.patterns.challenges.airport.request.FlightRequest;
+import com.kodilla.good.patterns.challenges.airport.request.FlightRequestRetriever;
+import com.kodilla.good.patterns.challenges.airport.service.AirportFlightService;
 import com.kodilla.good.patterns.challenges.food.online.distribution.information.PhoneInformationService;
 import com.kodilla.good.patterns.challenges.food.online.distribution.processor.FoodOrderProcessor;
 import com.kodilla.good.patterns.challenges.food.online.distribution.repository.Companies;
@@ -50,5 +56,15 @@ public class Main {
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
         OrderRequest orderRequest = orderRequestRetriever.retrieveData();
         foodOrderProcessor.process(orderRequest);
+
+        System.out.println("================");
+
+        FlightProcessor flightProcessor = new FlightProcessor(
+                new AirportFlightInformationService(), new AirportFlightService(), new AirportFlightRepository()
+        );
+
+        FlightRequestRetriever flightRequestRetriever = new FlightRequestRetriever();
+        FlightRequest flightRequest = flightRequestRetriever.retrieveData();
+        flightProcessor.checkFlight(flightRequest);
     }
 }
