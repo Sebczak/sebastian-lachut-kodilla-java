@@ -1,6 +1,6 @@
-package com.kodilla.good.patterns.challenges.order.repository;
+package com.kodilla.good.patterns.challenges.online.shop.order.repository;
 
-import com.kodilla.good.patterns.challenges.User;
+import com.kodilla.good.patterns.challenges.online.shop.user.User;
 
 import java.time.LocalDate;
 
