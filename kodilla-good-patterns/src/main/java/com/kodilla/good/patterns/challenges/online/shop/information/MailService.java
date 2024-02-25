@@ -1,7 +1,6 @@
-package com.kodilla.good.patterns.challenges.information.service;
+package com.kodilla.good.patterns.challenges.online.shop.information;
 
-import com.kodilla.good.patterns.challenges.User;
-import com.kodilla.good.patterns.challenges.information.service.InformationService;
+import com.kodilla.good.patterns.challenges.online.shop.user.User;
 
 public class MailService implements InformationService {
     @Override
