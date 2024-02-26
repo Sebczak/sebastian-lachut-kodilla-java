@@ -11,7 +11,6 @@ public class AirportFlightRepository implements FlightRepository{
 
     public AirportFlightRepository() {
         this.flights = new ArrayList<>();
-        initializeFlights();
     }
     @Override
     public List<Flight> initializeFlights() {
