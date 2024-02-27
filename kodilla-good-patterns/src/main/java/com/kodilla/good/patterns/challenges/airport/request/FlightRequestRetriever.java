@@ -4,8 +4,9 @@ public class FlightRequestRetriever {
 
     public FlightRequest retrieveData() {
         String departureCity = "Gdańsk";
-        String destinationCity = "Wrocław";
+        String planeStopCity = "Wrocław";
+        String destinationCity = "Warszawa";
 
-        return new FlightRequest(departureCity, destinationCity);
+        return new FlightRequest(departureCity, planeStopCity,  destinationCity);
     }
 }
