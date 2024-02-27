@@ -47,11 +47,12 @@ public class Main {
         BuyRequestRetriever buyRequestRetriever = new BuyRequestRetriever();
         BuyRequest buyRequest = buyRequestRetriever.retrieve();
         productOrderProcessor.process(buyRequest);
+        Companies companies = new Companies();
 
         System.out.println("================");
 
         FoodOrderProcessor foodOrderProcessor = new FoodOrderProcessor(
-                new PhoneInformationService(), new ExtraFoodShopOrderService(), new ExtraFoodShopOrderRepository()
+                new PhoneInformationService(), companies.mapOfCompanies,  new ExtraFoodShopOrderService(), new ExtraFoodShopOrderRepository()
         );
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
         OrderRequest orderRequest = orderRequestRetriever.retrieveData();

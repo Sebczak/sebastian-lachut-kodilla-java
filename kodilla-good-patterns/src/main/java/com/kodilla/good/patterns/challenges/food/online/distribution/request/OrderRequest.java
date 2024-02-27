@@ -11,11 +11,13 @@ public class OrderRequest {
     private User user;
     private LocalDate dateOfPurchase;
     private double price;
+    private String food;
 
-    public OrderRequest(User user, LocalDateTime dateOfPurchase, double price) {
+    public OrderRequest(User user, LocalDateTime dateOfPurchase, double price, String food) {
         this.user = user;
         this.dateOfPurchase = LocalDate.from(dateOfPurchase);
         this.price = price;
+        this.food = food;
     }
 
     public User getUser() {
@@ -28,5 +30,9 @@ public class OrderRequest {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getFood() {
+        return food;
     }
 }
