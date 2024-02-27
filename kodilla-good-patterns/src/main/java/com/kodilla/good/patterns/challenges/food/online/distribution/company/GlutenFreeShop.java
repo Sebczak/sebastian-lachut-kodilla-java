@@ -6,14 +6,14 @@ import com.kodilla.good.patterns.challenges.food.online.distribution.service.Ord
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExtraFoodShop implements Company{
+public class GlutenFreeShop implements Company{
 
-    public final static String COMPANY_NAME = "ExtraFoodShop";
+    public final static String COMPANY_NAME = "GlutenFreeShop";
     private final List<Product> products = new ArrayList<>();
 
-    public ExtraFoodShop() {
-        products.add(new Product("Spaghetti", 30, "Italian pasta with tomato sauce"));
-        products.add(new Product("Carbonara", 25, "Italian pasta with eggs and pecorino"));
+    public GlutenFreeShop() {
+        products.add(new Product("Water", 5, "Sparkling water"));
+        products.add(new Product("Rice", 15, "Really good rice"));
     }
 
     @Override
@@ -21,6 +21,7 @@ public class ExtraFoodShop implements Company{
         return COMPANY_NAME;
     }
 
+    @Override
     public List<Product> getProducts() {
         return products;
     }

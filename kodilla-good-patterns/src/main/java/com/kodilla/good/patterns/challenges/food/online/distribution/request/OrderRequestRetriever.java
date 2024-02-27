@@ -15,6 +15,8 @@ public class OrderRequestRetriever {
 
          double price = 120;
 
-         return new OrderRequest(user, localDate.atStartOfDay(), price);
+         String food = "Turkey";
+
+         return new OrderRequest(user, localDate.atStartOfDay(), price, food);
      }
 }
