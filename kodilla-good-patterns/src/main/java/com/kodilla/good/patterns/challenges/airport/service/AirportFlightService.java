@@ -2,6 +2,7 @@ package com.kodilla.good.patterns.challenges.airport.service;
 
 import com.kodilla.good.patterns.challenges.airport.flight.Flight;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,10 +22,27 @@ public class AirportFlightService implements FlightService{
     }
 
     @Override
-    public List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String destinationCity) {
-        return flights.stream()
-                .filter(flight -> flight.getDepartureCity().equals(departureCity))
-                .filter(flight -> flight.getDestinationCity().equals(destinationCity))
-                .collect(Collectors.toList());
+    public List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String planeStopCity, String destinationCity) {
+
+        List<Flight> flightsWithStops = new ArrayList<>();
+        List<Flight> findFirstPartFlight = flights.stream()
+                .filter(flight -> flight.getDepartureCity().equals(departureCity) && flight.getDestinationCity().equals(planeStopCity))
+                .toList();
+
+        for (Flight firstPartFlight : findFirstPartFlight) {
+            List<Flight> secondPartFlights = flights.stream()
+                    .filter(flight -> flight.getDepartureCity().equals(planeStopCity) && flight.getDestinationCity().equals(destinationCity))
+                    .toList();
+
+            for (Flight secondPartFlight : secondPartFlights) {
+
+                    flightsWithStops.add(firstPartFlight);
+                    flightsWithStops.add(secondPartFlight);
+                }
+            }
+
+
+
+        return flightsWithStops;
     }
 }
