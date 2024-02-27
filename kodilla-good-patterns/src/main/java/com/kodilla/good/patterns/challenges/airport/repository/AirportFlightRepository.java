@@ -17,7 +17,7 @@ public class AirportFlightRepository implements FlightRepository{
         flights.add(new Flight("Gdańsk", "Wrocław"));
         flights.add(new Flight("Kraków", "Wrocław"));
         flights.add(new Flight("Gdańsk", "Kraków"));
-        flights.add(new Flight("Wrocław", "Warszawa"));
+        flights.add(new Flight("Warszawa", "Gdańsk"));
 
         return flights;
     }
