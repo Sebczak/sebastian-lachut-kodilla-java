@@ -3,10 +3,12 @@ package com.kodilla.good.patterns.challenges.airport.service;
 import com.kodilla.good.patterns.challenges.airport.flight.Flight;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class AirportFlightService implements FlightService{
+public class AirportFlightService implements FlightService {
     @Override
     public List<Flight> findFlightsFromTheCity(List<Flight> flights, String departureCity) {
         return flights.stream()
@@ -22,25 +24,33 @@ public class AirportFlightService implements FlightService{
     }
 
     @Override
-    public List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String planeStopCity, String destinationCity) {
+    public List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String destinationCity) {
         List<Flight> flightsWithStops = new ArrayList<>();
 
-        List<Flight> firstPartFlights = flights.stream()
-                .filter(flight -> flight.getDepartureCity().equals(departureCity) && flight.getDestinationCity().equals(planeStopCity))
+        List<Flight> directFlights = flights.stream()
+                .filter(flight -> flight.getDepartureCity().equals(departureCity) && flight.getDestinationCity().equals(destinationCity))
                 .toList();
 
-        for (Flight firstPartFlight : firstPartFlights) {
-            List<Flight> secondPartFlights = flights.stream()
-                    .filter(flight -> flight.getDepartureCity().equals(planeStopCity) && flight.getDestinationCity().equals(destinationCity))
-                    .toList();
+        if (!directFlights.isEmpty()) {
+            flightsWithStops.addAll(directFlights);
+        } else {
+            flightsWithStops.addAll(findFlightsFromTheCity(flights, departureCity));
+            flightsWithStops.addAll(findFlightsToCity(flights, destinationCity));
 
-            for (Flight secondPartFlight : secondPartFlights) {
+            Iterator<Flight> iterator = flightsWithStops.iterator();
+            Flight previousFlight = null;
 
-                flightsWithStops.add(firstPartFlight);
-                flightsWithStops.add(secondPartFlight);
+            while (iterator.hasNext()) {
+                Flight currentFlight = iterator.next();
+
+                if (previousFlight != null && !previousFlight.getDestinationCity().equals(currentFlight.getDepartureCity())) {
+                    iterator.remove();
+                }
+
+                previousFlight = currentFlight;
             }
-        }
 
+        }
         return flightsWithStops;
     }
 }

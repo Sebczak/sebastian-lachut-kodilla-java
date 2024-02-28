@@ -7,9 +7,9 @@ public class Flight {
     private String departureCity;
     private String destinationCity;
 
-    public Flight(String departureCity, String arrivalCity) {
+    public Flight(String departureCity, String destinationCity) {
         this.departureCity = departureCity;
-        this.destinationCity = arrivalCity;
+        this.destinationCity = destinationCity;
     }
 
     public String getDepartureCity() {
