@@ -14,11 +14,14 @@ public class AirportFlightRepository implements FlightRepository{
     }
     @Override
     public List<Flight> initializeFlights() {
-        flights.add(new Flight("Gdańsk", "Wrocław"));
-        flights.add(new Flight("Kraków", "Wrocław"));
-        flights.add(new Flight("Wrocław", "Warszawa"));
-        flights.add(new Flight("Kraków", "Warszawa"));
-        flights.add(new Flight("Warszawa", "Wrocław"));
+        //flights.add(new Flight("Gdańsk", "Wrocław"));
+                flights.add(new Flight("Wroclaw", "Warszawa"));
+                flights.add(new Flight("Warszawa", "Krakow"));
+                flights.add(new Flight("Szczecin", "Krakow"));
+                flights.add(new Flight("Wroclaw", "Szczecin"));
+                //flights.add(new Flight("Wroclaw", "Krakow"));
+                flights.add(new Flight("Warszawa", "Wroclaw"));
+                flights.add(new Flight("Kielce", "Krakow"));
 
         return flights;
     }

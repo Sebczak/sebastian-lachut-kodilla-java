@@ -8,5 +8,5 @@ public interface FlightService {
 
     List<Flight> findFlightsFromTheCity(List<Flight> flights, String departureCity);
     List<Flight> findFlightsToCity(List<Flight> flights, String destinationCity);
-    List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String destinationCity);
+    List<Flight> findDirectAndThroughCityFlights(List<Flight> flights, String departureCity, String destinationCity);
 }

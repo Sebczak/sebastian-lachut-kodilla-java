@@ -2,9 +2,7 @@ package com.kodilla.good.patterns.challenges.airport.service;
 
 import com.kodilla.good.patterns.challenges.airport.flight.Flight;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,33 +22,37 @@ public class AirportFlightService implements FlightService {
     }
 
     @Override
-    public List<Flight> findFlightsThroughCity(List<Flight> flights, String departureCity, String destinationCity) {
+    public List<Flight> findDirectAndThroughCityFlights(List<Flight> flights, String departureCity, String destinationCity) {
         List<Flight> flightsWithStops = new ArrayList<>();
 
         List<Flight> directFlights = flights.stream()
                 .filter(flight -> flight.getDepartureCity().equals(departureCity) && flight.getDestinationCity().equals(destinationCity))
                 .toList();
 
-        if (!directFlights.isEmpty()) {
-            flightsWithStops.addAll(directFlights);
-        } else {
-            flightsWithStops.addAll(findFlightsFromTheCity(flights, departureCity));
-            flightsWithStops.addAll(findFlightsToCity(flights, destinationCity));
+        List<Flight> withProperDestination = flights.stream()
+                .filter(f -> f.getDestinationCity().equals(destinationCity))
+                .toList();
 
-            Iterator<Flight> iterator = flightsWithStops.iterator();
-            Flight previousFlight = null;
+        List<String> departures = flights.stream()
+                .map(Flight::getDepartureCity)
+                .toList();
 
-            while (iterator.hasNext()) {
-                Flight currentFlight = iterator.next();
+        List<Flight> withProperDeparture = flights.stream()
+                .filter(f -> f.getDepartureCity().equals(departureCity) && departures.contains(f.getDestinationCity()))
+                .toList();
 
-                if (previousFlight != null && !previousFlight.getDestinationCity().equals(currentFlight.getDepartureCity())) {
-                    iterator.remove();
-                }
 
-                previousFlight = currentFlight;
-            }
+        List<String> destinations = flights.stream()
+                .map(Flight::getDestinationCity)
+                .toList();
 
-        }
+        withProperDestination = withProperDestination.stream()
+                .filter(f -> destinations.contains(f.getDepartureCity()))
+                .toList();
+
+        flightsWithStops.addAll(directFlights);
+        flightsWithStops.addAll(withProperDeparture);
+        flightsWithStops.addAll(withProperDestination);
         return flightsWithStops;
     }
 }
