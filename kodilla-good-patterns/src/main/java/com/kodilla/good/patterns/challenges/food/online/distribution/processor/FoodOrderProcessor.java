@@ -15,6 +15,8 @@ import com.kodilla.good.patterns.challenges.food.online.distribution.service.Ext
 import com.kodilla.good.patterns.challenges.food.online.distribution.service.GlutenFreeShopOrderService;
 import com.kodilla.good.patterns.challenges.food.online.distribution.service.HealthyShopOrderService;
 import com.kodilla.good.patterns.challenges.food.online.distribution.service.OrderService;
+import com.kodilla.good.patterns.challenges.food.online.distribution.units.MapOfUnits;
+import com.kodilla.good.patterns.challenges.food.online.distribution.units.Unit;
 import com.kodilla.good.patterns.challenges.food.online.distribution.user.User;
 
 import java.util.Map;
@@ -22,59 +24,36 @@ import java.util.Map;
 
 public class FoodOrderProcessor {
 
-    private InformationService informationService;
-    private Map<Integer, Company> mapOfCompanies;
-    private FoodOrderRepository foodOrderRepository;
-    private OrderService orderService;
+    private Map<String, Unit> mapOfUnits;
 
-    private ExtraFoodShopOrderRepository extraFoodShopOrderRepository = new ExtraFoodShopOrderRepository();
-    private GlutenFreeShopOrderRepository glutenFreeShopOrderRepository = new GlutenFreeShopOrderRepository();
-    private HealthyShopOrderRepository healthyShopOrderRepository = new HealthyShopOrderRepository();
-    private ExtraFoodShopOrderService extraFoodShopOrderService = new ExtraFoodShopOrderService();
-    private GlutenFreeShopOrderService glutenFreeShopOrderService = new GlutenFreeShopOrderService();
-    private HealthyShopOrderService healthyShopOrderService = new HealthyShopOrderService();
+    public FoodOrderProcessor(Map<String, Unit> mapOfUnits) {
+        this.mapOfUnits = mapOfUnits;
+    }
 
-    public FoodOrderProcessor(InformationService informationService, Map<Integer, Company> mapOfCompanies, OrderService orderService, FoodOrderRepository foodOrderRepository) {
-        this.informationService = informationService;
-        this.mapOfCompanies = mapOfCompanies;
-        this.orderService = orderService;
-        this.foodOrderRepository = foodOrderRepository;
+    public Unit processUnit(OrderRequest orderRequest) {
+        String companyName = orderRequest.getCompanyName();
+
+        if (mapOfUnits.containsKey(companyName)) {
+            Unit unit = mapOfUnits.get(companyName);
+
+
+            return mapOfUnits.get(companyName);
+        } else {
+            return null;
+        }
     }
 
     public OrderDto process(OrderRequest orderRequest) {
-        String requestedFood = orderRequest.getFood();
+        Unit unit = processUnit(orderRequest);
 
-        for (Map.Entry<Integer, Company> entry : mapOfCompanies.entrySet()) {
-            Company company = entry.getValue();
-
-            if (companyHasRequestedFood(company, requestedFood)) {
-                switch (company.getCompanyName()) {
-                    case ExtraFoodShop.COMPANY_NAME:
-                        return processOrder(extraFoodShopOrderRepository, extraFoodShopOrderService, orderRequest);
-                    case GlutenFreeShop.COMPANY_NAME:
-                        return processOrder(glutenFreeShopOrderRepository, glutenFreeShopOrderService, orderRequest);
-                    case HealthyShop.COMPANY_NAME:
-                        return processOrder(healthyShopOrderRepository, healthyShopOrderService, orderRequest);
-                    // Add cases for other companies if needed
-                }
-            }
-        }
-
-        return new OrderDto(orderRequest.getUser(), false);
-    }
-
-    private boolean companyHasRequestedFood(Company company, String requestedFood) {
-        return company.getProducts().stream()
-                .anyMatch(product -> product.getName().equalsIgnoreCase(requestedFood));
-    }
-
-    private OrderDto processOrder(FoodOrderRepository repository, OrderService service, OrderRequest orderRequest) {
-        boolean isOrdered = service.orderFood(orderRequest.getUser(), orderRequest.getDateOfPurchase(), orderRequest.getPrice());
-        if (isOrdered) {
-            informationService.inform(orderRequest.getUser());
-            repository.createOrder(orderRequest.getUser(), orderRequest.getDateOfPurchase(), orderRequest.getPrice());
+        boolean isBought = unit.getOrderService().orderFood(orderRequest.getUser(), orderRequest.getDateOfPurchase(), orderRequest.getPrice());
+        if (isBought) {
+            unit.getInformationService().inform(orderRequest.getUser());
+            unit.getFoodOrderRepository().createOrder(orderRequest);
             return new OrderDto(orderRequest.getUser(), true);
+        } else {
+            return new OrderDto(orderRequest.getUser(), false);
         }
-        return new OrderDto(orderRequest.getUser(), false);
     }
 }
+

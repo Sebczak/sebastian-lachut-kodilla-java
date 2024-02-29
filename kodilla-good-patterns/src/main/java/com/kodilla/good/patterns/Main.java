@@ -14,6 +14,8 @@ import com.kodilla.good.patterns.challenges.food.online.distribution.repository.
 import com.kodilla.good.patterns.challenges.food.online.distribution.request.OrderRequest;
 import com.kodilla.good.patterns.challenges.food.online.distribution.request.OrderRequestRetriever;
 import com.kodilla.good.patterns.challenges.food.online.distribution.service.ExtraFoodShopOrderService;
+import com.kodilla.good.patterns.challenges.food.online.distribution.units.MapOfUnits;
+import com.kodilla.good.patterns.challenges.food.online.distribution.units.Unit;
 import com.kodilla.good.patterns.challenges.food.online.distribution.user.User;
 import com.kodilla.good.patterns.challenges.online.shop.service.order.ProductOrderProcessor;
 import com.kodilla.good.patterns.challenges.online.shop.request.BuyRequest;
@@ -50,12 +52,11 @@ public class Main {
         Companies companies = new Companies();
 
         System.out.println("================");
-
-        FoodOrderProcessor foodOrderProcessor = new FoodOrderProcessor(
-                new PhoneInformationService(), companies.mapOfCompanies,  new ExtraFoodShopOrderService(), new ExtraFoodShopOrderRepository()
-        );
+        MapOfUnits mapOfUnits = new MapOfUnits();
+        FoodOrderProcessor foodOrderProcessor = new FoodOrderProcessor(mapOfUnits.mapOfCompanyUnits);
         OrderRequestRetriever orderRequestRetriever = new OrderRequestRetriever();
         OrderRequest orderRequest = orderRequestRetriever.retrieveData();
+        foodOrderProcessor.processUnit(orderRequest);
         foodOrderProcessor.process(orderRequest);
 
         System.out.println("================");

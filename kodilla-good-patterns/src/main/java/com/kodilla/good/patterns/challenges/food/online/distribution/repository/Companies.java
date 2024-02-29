@@ -14,23 +14,19 @@ import java.util.Map;
 
 public class Companies {
 
-    public Map<Integer, Company> mapOfCompanies = new HashMap<>();
+    public Map<String, Company> mapOfCompanies = new HashMap<>();
 
     public Companies() {
         ExtraFoodShop extraFoodShop = new ExtraFoodShop();
         HealthyShop healthyShop = new HealthyShop();
         GlutenFreeShop glutenFreeShop = new GlutenFreeShop();
 
-        mapOfCompanies.put(1, extraFoodShop);
-        mapOfCompanies.put(2, healthyShop);
-        mapOfCompanies.put(3, glutenFreeShop);
+        mapOfCompanies.put(ExtraFoodShop.COMPANY_NAME, extraFoodShop);
+        mapOfCompanies.put(HealthyShop.COMPANY_NAME, healthyShop);
+        mapOfCompanies.put(GlutenFreeShop.COMPANY_NAME, glutenFreeShop);
     }
 
-    public Map<Integer, Company> getMapOfCompanies() {
+    public Map<String, Company> getMapOfCompanies() {
         return mapOfCompanies;
-    }
-
-    public Company getCompanyById(int companyId) {
-        return mapOfCompanies.get(companyId);
     }
 }
