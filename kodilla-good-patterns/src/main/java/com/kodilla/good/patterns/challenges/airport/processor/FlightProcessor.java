@@ -29,7 +29,7 @@ public class FlightProcessor {
         System.out.println(directFlights);
         List<Flight> returnFlights = flightService.findFlightsToCity(allFlights, flightRequest.getDestinationCity());
         System.out.println(returnFlights);
-        List<Flight> connectingFlights = flightService.findFlightsThroughCity(allFlights, flightRequest.getDepartureCity(), flightRequest.getDestinationCity());
+        List<Flight> connectingFlights = flightService.findDirectAndThroughCityFlights(allFlights, flightRequest.getDepartureCity(), flightRequest.getDestinationCity());
         System.out.println(connectingFlights);
         flightInformationService.inform();
 
