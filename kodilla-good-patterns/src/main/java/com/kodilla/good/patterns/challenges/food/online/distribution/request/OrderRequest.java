@@ -12,12 +12,14 @@ public class OrderRequest {
     private LocalDate dateOfPurchase;
     private double price;
     private String food;
+    private String companyName;
 
-    public OrderRequest(User user, LocalDateTime dateOfPurchase, double price, String food) {
+    public OrderRequest(User user, LocalDateTime dateOfPurchase, double price, String food, String companyName) {
         this.user = user;
         this.dateOfPurchase = LocalDate.from(dateOfPurchase);
         this.price = price;
         this.food = food;
+        this.companyName = companyName;
     }
 
     public User getUser() {
@@ -34,5 +36,9 @@ public class OrderRequest {
 
     public String getFood() {
         return food;
+    }
+
+    public String getCompanyName() {
+        return companyName;
     }
 }

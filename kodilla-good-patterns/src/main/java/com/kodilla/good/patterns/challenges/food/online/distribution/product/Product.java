@@ -1,5 +1,7 @@
 package com.kodilla.good.patterns.challenges.food.online.distribution.product;
 
+import com.kodilla.good.patterns.challenges.online.shop.information.InformationService;
+
 public class Product {
 
     private String name;

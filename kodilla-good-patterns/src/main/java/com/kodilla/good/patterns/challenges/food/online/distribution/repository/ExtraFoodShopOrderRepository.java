@@ -3,6 +3,7 @@ package com.kodilla.good.patterns.challenges.food.online.distribution.repository
 import com.kodilla.good.patterns.challenges.food.online.distribution.company.Company;
 import com.kodilla.good.patterns.challenges.food.online.distribution.company.ExtraFoodShop;
 import com.kodilla.good.patterns.challenges.food.online.distribution.product.Product;
+import com.kodilla.good.patterns.challenges.food.online.distribution.request.OrderRequest;
 import com.kodilla.good.patterns.challenges.food.online.distribution.user.User;
 
 import java.time.LocalDate;
@@ -15,17 +16,17 @@ public class ExtraFoodShopOrderRepository implements FoodOrderRepository{
     private final Companies companies = new Companies();
 
     @Override
-    public boolean createOrder(User user, LocalDate dateOfCreatingOrder, double price) {
+    public boolean createOrder(OrderRequest orderRequest) {
         System.out.println("Creating an order from:" + ExtraFoodShop.COMPANY_NAME + "\n" +
-                "for: " + user.getFirstName() + user.getLastName() + "\n" +
+                "for: " + orderRequest.getUser().getFirstName() + orderRequest.getUser().getLastName() + "\n" +
                 "Dish chosen: " + returnSpecificDishFromMap(companies) + "\n" +
-                "Date of placing an order: " + dateOfCreatingOrder + "\n" +
-                "Price: " + companies.getCompanyById(1).getProducts().get(0).getPriceTag());
+                "Date of placing an order: " + orderRequest.getDateOfPurchase() + "\n" +
+                "Price: " + orderRequest.getPrice());
         return true;
     }
 
     private String returnSpecificDishFromMap(Companies companies) {
-        Map<Integer, Company> mapOfCompanies = companies.getMapOfCompanies();
+        Map<String, Company> mapOfCompanies = companies.getMapOfCompanies();
 
         String desiredDishName = "Spaghetti";
 
