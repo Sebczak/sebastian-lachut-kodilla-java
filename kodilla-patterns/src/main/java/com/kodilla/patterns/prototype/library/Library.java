@@ -22,7 +22,7 @@ public class Library extends Prototype<Library>{
         clonedLibrary.books = new HashSet<>();
 
         for (Book book : books) {
-            clonedLibrary.getBooks().add(book);
+            clonedLibrary.getBooks().add(new Book(book.title, book.author, book.publicationDate));
         }
 
         return clonedLibrary;
