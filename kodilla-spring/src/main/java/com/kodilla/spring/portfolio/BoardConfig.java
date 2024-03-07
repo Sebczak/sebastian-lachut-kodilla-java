@@ -29,7 +29,6 @@ public class BoardConfig {
     }
 
     @Bean(name = "toDoList")
-    //@Conditional(EmptytListCondition.class)
     public TaskList getToDoList() {
         return new TaskList();
     }

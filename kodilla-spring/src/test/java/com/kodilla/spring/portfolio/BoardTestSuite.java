@@ -2,22 +2,27 @@ package com.kodilla.spring.portfolio;
 
 import com.kodilla.spring.reader.Reader;
 import com.kodilla.spring.reader.ReaderConfig;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class BoardTestSuite {
 
     @Autowired
     private Board board;
 
     @Test
-    void tesEmptyList() {
+    @Order(1)
+    void testEmptyList() {
         //Given
 
         //When
@@ -32,6 +37,7 @@ public class BoardTestSuite {
     }
 
     @Test
+    @Order(2)
     void testAddTaskToList() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext(BoardConfig.class);
