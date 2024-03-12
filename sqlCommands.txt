@@ -1,0 +1,29 @@
+CREATE TABLE issueslists (id serial primary key, name varchar(100));
+
+CREATE TABLE issues(id serial primary key, issueslist_id bigint unsigned not null,summary varchar(100), description varchar(1000), user_id_assignedto bigint unsigned not null, foreign key(issueslist_id) references issueslists(id), foreign key(user_id_assignedto) references users(id));
+
+INSERT INTO issueslists(name) VALUES("ToDo");
+INSERT INTO issueslists(name) VALUES("In progress");
+INSERT INTO issueslists(name) VALUES("Done");
+
+INSERT INTO issues (issueslist_id, summary, description, user_id_assignedto) VALUES (
+1, 'Implement user authentication', 'Set up user authentication for the application', 1), (
+1, 'Design database schema', 'Create a well-structured database schema', 2),(
+1, 'Setup basic frontend structure', 'Establish the basic layout of the frontend', 3), (
+1, 'Define API endpoints', 'Plan and document the API endpoints', 4), (
+1, 'Create issueslist management functionality', 'Develop CRUD operations for issueslists', 5);
+
+
+INSERT INTO issues (issueslist_id, summary, description, user_id_assignedto) VALUES (
+2, 'Implement user registration', 'Enable users to register for the application', 1), (
+2, 'Build frontend components for issue creation', 'Develop UI components for creating new issues', 2), (
+2, 'Implement backend logic for issue creation', 'Develop backend logic for handling issue creation', 3),(
+2, 'Add user assignment feature', 'Allow assigning issues to specific users', 4), (
+2, 'Enhance user interface with styling', 'Improve the visual appearance of the application', 5);
+
+INSERT INTO issues (issueslist_id, summary, description, user_id_assignedto) VALUES (
+3, 'User login functionality', 'Implement user login and authentication', 1), (
+3, 'Frontend integration with backend', 'Connect frontend components to backend functionality', 2), (
+3, 'Complete issue details display', 'Display detailed information about each issue', 3), (
+3, 'Implement issue status updates', 'Allow users to update the status of their assigned issues', 4), (
+3, 'Perform thorough testing', 'Conduct comprehensive testing of the application', 5);
