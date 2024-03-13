@@ -27,3 +27,8 @@ INSERT INTO issues (issueslist_id, summary, description, user_id_assignedto) VAL
 3, 'Complete issue details display', 'Display detailed information about each issue', 3), (
 3, 'Implement issue status updates', 'Allow users to update the status of their assigned issues', 4), (
 3, 'Perform thorough testing', 'Conduct comprehensive testing of the application', 5);
+
+SELECT issueslists.name, issues.summary FROM issueslists JOIN issues ON issueslists.id = issues.issueslist_id;
+SELECT issues.summary, users.firstname, users.lastname FROM issues JOIN users ON users.id = issues.user_id_assignedto;
+SELECT users.firstname, users.lastname, COUNT(*) FROM users JOIN issues ON users.id = issues.user_id_assignedto GROUP BY issues.user_id_assignedto;
+
