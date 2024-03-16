@@ -7,5 +7,7 @@ public class Main {
         SudokuBoard sudokuBoard = new SudokuBoard();
 
         System.out.println(sudokuBoard);
+        sudokuBoard.setValueInList(2,2,3);
+        System.out.println(sudokuBoard);
     }
 }

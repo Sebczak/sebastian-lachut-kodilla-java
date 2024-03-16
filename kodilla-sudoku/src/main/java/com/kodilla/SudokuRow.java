@@ -5,22 +5,27 @@ import java.util.List;
 
 public class SudokuRow {
 
-    private SudokuElement sudokuElement = new SudokuElement();
-
-    List<SudokuElement> sudokuCol = new ArrayList<>();
+    private List<SudokuElement> sudokuElements = new ArrayList<>();
 
     public SudokuRow() {
         for (int i = 0; i < 9; i++) {
-            sudokuCol.add(new SudokuElement());
+            sudokuElements.add(new SudokuElement());
         }
     }
 
-    public List<SudokuElement> getSudokuCol() {
-        return sudokuCol;
+    public List<SudokuElement> getSudokuElements() {
+        return sudokuElements;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(sudokuElement.getNumberFromSudokuNumbers());
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0 && i != 0) {
+                result.append("| ");
+            }
+            result.append(sudokuElements.get(i)).append(" ");
+        }
+        return result.toString();
     }
 }
