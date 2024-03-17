@@ -1,4 +1,6 @@
-package com.kodilla;
+package com.kodilla.sudoku;
+
+import com.kodilla.messages.Messages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ public class SudokuRow {
     private List<SudokuElement> sudokuElements = new ArrayList<>();
 
     public SudokuRow() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
             sudokuElements.add(new SudokuElement());
         }
     }
@@ -20,8 +22,8 @@ public class SudokuRow {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < 9; i++) {
-            if (i % 3 == 0 && i != 0) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            if (i % 3 == Messages.MIN_INDEX && i != Messages.MIN_INDEX) {
                 result.append("| ");
             }
             result.append(sudokuElements.get(i)).append(" ");
