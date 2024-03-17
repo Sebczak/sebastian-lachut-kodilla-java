@@ -1,8 +1,7 @@
-package com.kodilla;
+package com.kodilla.sudoku;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class SudokuElement {
 
