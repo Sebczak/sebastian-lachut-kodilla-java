@@ -15,7 +15,7 @@ public class SudokuBoard {
     }
 
     public void setValueInBoard(int col, int row, int value) {
-            sudokuBoard.get(col).getSudokuRow().get(row).setValue(value);
+        sudokuBoard.get(col).getSudokuRow().get(row).setValue(value);
     }
 
 

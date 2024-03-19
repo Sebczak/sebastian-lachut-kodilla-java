@@ -3,8 +3,10 @@ package com.kodilla.sudoku;
 import com.kodilla.input.Scanner;
 import com.kodilla.output.ConsoleOut;
 
+import static com.kodilla.messages.Messages.SAMPLE_DATA;
+
 public class SudokuGame {
-    private final SudokuBoard sudokuBoard = new SudokuBoard();
+    private SudokuBoard sudokuBoard = new SudokuBoard();
     private final Scanner scanner = new Scanner();
     private final ConsoleOut consoleOut;
 
@@ -16,7 +18,7 @@ public class SudokuGame {
         this.consoleOut = consoleOut;
     }
 
-    public void sampleData() {
+    private void sampleDataForSudoku() {
         sudokuBoard.setValueInBoard(1, 2, 8);
         sudokuBoard.setValueInBoard(0, 3, 2);
         sudokuBoard.setValueInBoard(0, 4, 6);
@@ -57,19 +59,38 @@ public class SudokuGame {
     public void resolveSudoku() {
         boolean isGameFinished = false;
 
-//            ConsoleOut.println(Messages.COLUMN);
-//            int col = scanner.nextInt() - 1;
-//            ConsoleOut.println(Messages.ROW);
-//            int row = scanner.nextInt() - 1;
-//            ConsoleOut.println(Messages.VALUE);
-//            int value = scanner.nextInt();
-        sampleData();
-        System.out.println(sudokuBoard);
-        if (sudokuBoard.solve()) {
-            System.out.println("Sudoku");
+        while (!isGameFinished) {
+            sudokuBoard = new SudokuBoard();
             System.out.println(sudokuBoard);
-        } else {
-            System.out.println("Not sudoku");
+            useSampleDataOrPlayerInputInBoard();
+            if (sudokuBoard.solveBoard()) {
+                ConsoleOut.println(Messages.SUDOKU_SOLVED_SUCCESSFULLY);
+            } else {
+                ConsoleOut.println(Messages.SUDOKU_NOT_SOLVED);
+            }
+            isGameFinished = true;
+            System.out.println(sudokuBoard);
         }
     }
+
+    private void useSampleDataOrPlayerInputInBoard() {
+        ConsoleOut.println(Messages.ASK_FOR_SAMPLE_DATA);
+        String playerInputForSampleDataOrPlayerCustomInputs = scanner.nextLine();
+        if (playerInputForSampleDataOrPlayerCustomInputs.equals(SAMPLE_DATA)) {
+            sampleDataForSudoku();
+        } else {
+            ConsoleOut.println(Messages.HOW_MANY_INPUTS);
+            int howManyInputs = scanner.nextInt();
+            for (int i = 0; i < howManyInputs; i++) {
+                ConsoleOut.println(Messages.COLUMN);
+                int col = scanner.nextInt() - 1;
+                ConsoleOut.println(Messages.ROW);
+                int row = scanner.nextInt() - 1;
+                ConsoleOut.println(Messages.VALUE);
+                int value = scanner.nextInt();
+                scanner.nextLine();
+                sudokuBoard.setValueInBoard(col, row, value);
+                System.out.println(sudokuBoard);
+            }
+        }
 }
