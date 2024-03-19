@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         boolean gameFinished = false;
         SudokuGame theGame = new SudokuGame();
-      
+
         Scanner scanner = new Scanner();
 
         ConsoleOut.println(Messages.SUDOKU_START_MSG);
@@ -26,3 +26,4 @@ public class Main {
             }
         }
     }
+}

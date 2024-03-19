@@ -19,62 +19,85 @@ public class SudokuBoard {
     }
 
 
-    private boolean solve(int row, int col) {
-        if (row == Messages.MAX_INDEX) {
-            row = 0;
-            if (++col == Messages.MAX_INDEX) {
+    private void removeValueFromRow(int row, int value) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            if (i != row) {
+                sudokuBoard.get(i).getSudokuRow().get(row).getSudokuNumbers().remove(Integer.valueOf(value));
+            }
+        }
+    }
+
+    private void removeValueFromColumn(int col, int value) {
+        for (int i = 0; i < Messages.MAX_INDEX; i++) {
+            if (i != col) {
+                sudokuBoard.get(col).getSudokuRow().get(i).getSudokuNumbers().remove(Integer.valueOf(value));
+            }
+        }
+    }
+
+    private void removeValueFromBox(int col, int row, int value) {
+        int startCol = col - (col % 3);
+        int startRow = row - (row % 3);
+
+        for (int i = startCol; i < startCol + 3; i++) {
+            for (int j = startRow; j < startRow + 3; j++) {
+                if (i != col && j != row) {
+                    sudokuBoard.get(i).getSudokuRow().get(j).getSudokuNumbers().remove(Integer.valueOf(value));
+                }
+            }
+        }
+    }
+
+    private boolean isValueInRow(int row, int value) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            if (sudokuBoard.get(i).getSudokuRow().get(row).getValue() == value) {
                 return true;
             }
         }
-        if (sudokuBoard.get(row).getSudokuRow().get(col).getValue() != -1) {
-            return solve(row + 1, col);
+        return false;
+    }
+
+    private boolean isValueInColumn(int col, int value) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            if (sudokuBoard.get(i).getSudokuRow().get(col).getValue() == value) {
+                return true;
+            }
         }
-        for (int value = 1; value <= Messages.MAX_INDEX; ++value) {
-            if (isValidPlacement(row, col, value)) {
-                setValueInBoard(row, col, value);
-                if (solve(row + 1, col)) {
+        return false;
+    }
+
+    private boolean isValueInBox(int col, int row, int value) {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            for (int j = Messages.MIN_INDEX; j < Messages.MAX_INDEX; j++) {
+                if (sudokuBoard.get(col).getSudokuRow().get(row).getValue() == value) {
                     return true;
                 }
             }
         }
-        setValueInBoard(row, col, -1);
         return false;
     }
 
-    boolean solve() {
-        return solve(0,0);
+    private boolean isValidPlacement(int col, int row, int value) {
+        return !isValueInColumn(col, value) && !isValueInRow(row, value) && !isValueInBox(col, row, value);
     }
 
+    public boolean solveBoard() {
+        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
+            for (int j = Messages.MIN_INDEX; j < Messages.MAX_INDEX; j++) {
+                if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == -1) {
+                    for (int k = 1; k <= 9; k++) {
+                        if (isValidPlacement(i,j,k)) {
+                            sudokuBoard.get(i).getSudokuRow().get(j).setValue(k);
 
-    private boolean isValidMove(int row, int col, int value) {
-        for (int i = 0; i < Messages.MAX_INDEX; i++) {
-            if (sudokuBoard.get(row).getSudokuRow().get(i).getValue() == value) {
-                return false;
-            }
-            if (sudokuBoard.get(i).getSudokuRow().get(col).getValue() == value) {
-                return false;
-            }
-        }
-
-        int startRow = (row / 3) * 3;
-        int startCol = (col / 3) * 3;
-        for (int i = startRow; i < startRow + 3; i++) {
-            for (int j = startCol; j < startCol + 3; j++) {
-                if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == value) {
+                            if (solveBoard()) {
+                                return true;
+                            } else {
+                                sudokuBoard.get(i).getSudokuRow().get(j).setValue(-1);
+                            }
+                        }
+                    }
                     return false;
                 }
-            }
-        }
-
-        return true;
-    }
-
-    private boolean isValidPlacement(int row, int col, int value) {
-        for (int i = 0; i < Messages.MAX_INDEX; ++i) {
-            if (sudokuBoard.get(row).getSudokuRow().get(i).getValue() == value ||
-                    sudokuBoard.get(i).getSudokuRow().get(col).getValue() == value ||
-                    sudokuBoard.get(3 * (row / 3) + i / 3).getSudokuRow().get(3 * (col / 3) + i % 3).getValue() == value) {
-                return false;
             }
         }
         return true;
