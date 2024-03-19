@@ -7,16 +7,16 @@ import java.util.List;
 
 public class SudokuRow {
 
-    private List<SudokuElement> sudokuElements = new ArrayList<>();
+    private List<SudokuElement> sudokuRow = new ArrayList<>();
 
     public SudokuRow() {
         for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            sudokuElements.add(new SudokuElement());
+            sudokuRow.add(new SudokuElement());
         }
     }
 
-    public List<SudokuElement> getSudokuElements() {
-        return sudokuElements;
+    public List<SudokuElement> getSudokuRow() {
+        return sudokuRow;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class SudokuRow {
             if (i % 3 == Messages.MIN_INDEX && i != Messages.MIN_INDEX) {
                 result.append("| ");
             }
-            result.append(sudokuElements.get(i)).append(" ");
+            result.append(sudokuRow.get(i)).append(" ");
         }
         return result.toString();
     }

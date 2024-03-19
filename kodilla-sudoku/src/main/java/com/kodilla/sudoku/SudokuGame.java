@@ -1,7 +1,6 @@
 package com.kodilla.sudoku;
 
 import com.kodilla.input.Scanner;
-import com.kodilla.messages.Messages;
 import com.kodilla.output.ConsoleOut;
 
 import static com.kodilla.messages.Messages.SAMPLE_DATA;
@@ -94,5 +93,4 @@ public class SudokuGame {
                 System.out.println(sudokuBoard);
             }
         }
-    }
 }
