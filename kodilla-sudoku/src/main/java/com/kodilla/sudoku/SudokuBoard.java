@@ -14,7 +14,7 @@ public class SudokuBoard {
         }
     }
 
-    public void setAndRemoveValueInList(int col, int row, int value) {
+    public void setValueInBoard(int col, int row, int value) {
         if (isValueInColumn(col, value)) {
             sudokuBoard.get(col).getSudokuElements().get(row).setValue(value);
             removeValueFromColumn(col, value);
