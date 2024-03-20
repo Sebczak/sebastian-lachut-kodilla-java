@@ -59,7 +59,7 @@ public class SudokuBoard {
 
     private boolean isValueInColumn(int col, int value) {
         for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            if (sudokuBoard.get(i).getSudokuRow().get(col).getValue() == value) {
+            if (sudokuBoard.get(col).getSudokuRow().get(i).getValue() == value) {
                 return true;
             }
         }
@@ -67,9 +67,12 @@ public class SudokuBoard {
     }
 
     private boolean isValueInBox(int col, int row, int value) {
-        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            for (int j = Messages.MIN_INDEX; j < Messages.MAX_INDEX; j++) {
-                if (sudokuBoard.get(col).getSudokuRow().get(row).getValue() == value) {
+        int startCol = col - col % 3;
+        int startRow = row - row % 3;
+
+        for (int i = startCol; i < startCol + 3; i++) {
+            for (int j = startRow; j < startRow + 3; j++) {
+                if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == value) {
                     return true;
                 }
             }
@@ -78,7 +81,7 @@ public class SudokuBoard {
     }
 
     private boolean isValidPlacement(int col, int row, int value) {
-        return !isValueInColumn(col, value) && !isValueInRow(row, value) && !isValueInBox(col, row, value);
+        return !isValueInColumn(col,value) && !isValueInRow(row, value) && !isValueInBox(col, row, value);
     }
 
     public boolean solveBoard() {
@@ -87,7 +90,7 @@ public class SudokuBoard {
                 if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == -1) {
                     for (int k = 1; k <= 9; k++) {
                         if (isValidPlacement(i,j,k)) {
-                            sudokuBoard.get(i).getSudokuRow().get(j).setValue(k);
+                            setValueInBoard(i,j,k);
 
                             if (solveBoard()) {
                                 return true;

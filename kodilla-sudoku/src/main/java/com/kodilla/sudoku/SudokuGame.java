@@ -66,11 +66,12 @@ public class SudokuGame {
             useSampleDataOrPlayerInputInBoard();
             if (sudokuBoard.solveBoard()) {
                 ConsoleOut.println(Messages.SUDOKU_SOLVED_SUCCESSFULLY);
+                System.out.println(sudokuBoard);
             } else {
                 ConsoleOut.println(Messages.SUDOKU_NOT_SOLVED);
+                System.out.println(sudokuBoard);
             }
             isGameFinished = true;
-            System.out.println(sudokuBoard);
         }
     }
 
