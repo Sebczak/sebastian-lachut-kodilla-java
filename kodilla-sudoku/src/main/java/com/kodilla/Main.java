@@ -19,7 +19,6 @@ public class Main {
             ConsoleOut.println(Messages.ASK_FOR_PLAY_AGAIN);
             String playerChoiceForPlayAgain = scanner.nextLine();
             if (playerChoiceForPlayAgain.equals("Yes")) {
-                theGame.resolveSudoku();
             } else {
                 gameFinished = true;
                 ConsoleOut.println(Messages.SUDOKU_END_MSG);
