@@ -11,7 +11,10 @@ public class Messages {
     public static final String ASK_FOR_PLAY_AGAIN = "Do you want to play again?";
     public static final String SUDOKU_END_MSG = "Thanks for using sudoku solver.";
     public static final String SUDOKU_START_MSG = "Welcome in Sudoku solver app";
-    public static final String ASK_FOR_SAMPLE_DATA = "Do you want to use sample data or you want to input your data?";
+    public static final String ASK_FOR_SAMPLE_DATA = "Do you want to use sample data or you want to input your data?(Type 'Sample data' or any other word)";
     public static final String HOW_MANY_INPUTS = "How many values do you want to enter?";
     public static final String SAMPLE_DATA = "Sample data";
+    public static final String YES = "Yes";
+    public static final String ROW_INDEX_OUT_OF_BOUNDS = "Row index out of bounds";
+    public static final String ROW_OR_COLUMN_INDEX_OUT_OF_BOUNDS = "Row or column index out of bounds";
 }

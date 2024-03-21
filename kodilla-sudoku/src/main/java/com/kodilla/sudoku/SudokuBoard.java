@@ -19,91 +19,18 @@ public class SudokuBoard {
     }
 
 
-    private void removeValueFromRow(int row, int value) {
-        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            if (i != row) {
-                sudokuBoard.get(i).getSudokuRow().get(row).getSudokuNumbers().remove(Integer.valueOf(value));
-            }
+    public SudokuRow getRow(int index) {
+        if (index < Messages.MIN_INDEX || index >= Messages.MAX_INDEX) {
+            throw new IllegalArgumentException(Messages.ROW_INDEX_OUT_OF_BOUNDS);
         }
+        return sudokuBoard.get(index);
     }
 
-    private void removeValueFromColumn(int col, int value) {
-        for (int i = 0; i < Messages.MAX_INDEX; i++) {
-            if (i != col) {
-                sudokuBoard.get(col).getSudokuRow().get(i).getSudokuNumbers().remove(Integer.valueOf(value));
-            }
+    public SudokuElement getElement(int row, int col) {
+        if (row < Messages.MIN_INDEX || row >= Messages.MAX_INDEX || col < Messages.MIN_INDEX || col >= Messages.MAX_INDEX) {
+            throw new IllegalArgumentException(Messages.ROW_OR_COLUMN_INDEX_OUT_OF_BOUNDS);
         }
-    }
-
-    private void removeValueFromBox(int col, int row, int value) {
-        int startCol = col - (col % 3);
-        int startRow = row - (row % 3);
-
-        for (int i = startCol; i < startCol + 3; i++) {
-            for (int j = startRow; j < startRow + 3; j++) {
-                if (i != col && j != row) {
-                    sudokuBoard.get(i).getSudokuRow().get(j).getSudokuNumbers().remove(Integer.valueOf(value));
-                }
-            }
-        }
-    }
-
-    private boolean isValueInRow(int row, int value) {
-        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            if (sudokuBoard.get(i).getSudokuRow().get(row).getValue() == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isValueInColumn(int col, int value) {
-        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            if (sudokuBoard.get(col).getSudokuRow().get(i).getValue() == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isValueInBox(int col, int row, int value) {
-        int startCol = col - col % 3;
-        int startRow = row - row % 3;
-
-        for (int i = startCol; i < startCol + 3; i++) {
-            for (int j = startRow; j < startRow + 3; j++) {
-                if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == value) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isValidPlacement(int col, int row, int value) {
-        return !isValueInColumn(col,value) && !isValueInRow(row, value) && !isValueInBox(col, row, value);
-    }
-
-    public boolean solveBoard() {
-        for (int i = Messages.MIN_INDEX; i < Messages.MAX_INDEX; i++) {
-            for (int j = Messages.MIN_INDEX; j < Messages.MAX_INDEX; j++) {
-                if (sudokuBoard.get(i).getSudokuRow().get(j).getValue() == -1) {
-                    for (int k = 1; k <= 9; k++) {
-                        if (isValidPlacement(i,j,k)) {
-                            setValueInBoard(i,j,k);
-
-                            if (solveBoard()) {
-                                return true;
-                            } else {
-                                sudokuBoard.get(i).getSudokuRow().get(j).setValue(-1);
-                            }
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
+        return sudokuBoard.get(row).getSudokuRow().get(col);
     }
 
     @Override
@@ -123,7 +50,7 @@ public class SudokuBoard {
                 if (value > Messages.MIN_INDEX) {
                     result.append(" ");
                 }
-                result.append(value).append(" ");
+                result.append(value < 0 ? " X " : value + " ");
             }
             result.append("\n");
         }
