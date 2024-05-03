@@ -2,6 +2,10 @@ package com.kodilla.hibernate.manytomany.dao;
 
 import com.kodilla.hibernate.manytomany.Company;
 import com.kodilla.hibernate.manytomany.Employee;
+import com.kodilla.hibernate.manytomany.facade.CompanyDto;
+import com.kodilla.hibernate.manytomany.facade.EmployeeCompanyException;
+import com.kodilla.hibernate.manytomany.facade.EmployeeCompanyFacade;
+import com.kodilla.hibernate.manytomany.facade.EmployeeDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 @SpringBootTest
 public class CompanyDaoTestSuite {
 
+    @Autowired
+    private EmployeeCompanyFacade employeeCompanyFacade;
     @Autowired
     private CompanyDao companyDao;
     @Autowired
@@ -83,4 +89,12 @@ public class CompanyDaoTestSuite {
         assertEquals(1, companies.size());
     }
 
+    @Test
+    void testFindEmployeeCompanyUsingThreeLetters() throws EmployeeCompanyException {
+        //Given
+        EmployeeDto employeeDto = new EmployeeDto("ith");
+        CompanyDto companyDto = new CompanyDto("ata");
+        //When
+        employeeCompanyFacade.processEmployeeCompanySearch(companyDto, employeeDto);
+    }
 }

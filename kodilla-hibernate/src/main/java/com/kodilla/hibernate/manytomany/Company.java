@@ -11,6 +11,11 @@ import java.util.List;
         resultClass = Company.class
 )
 
+@NamedQuery(
+        name = "Company.findCompaniesUsingThreeLetters",
+        query = "FROM Company WHERE name LIKE CONCAT('%', :THREELETTERSOFCOMPANYNAME, '%')"
+)
+
 @Entity
 @Table(name = "companies")
 public class Company {

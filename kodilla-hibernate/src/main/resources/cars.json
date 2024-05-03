@@ -1,0 +1,71 @@
+[
+  {
+    "carName": "5 series",
+    "carBrand": "BMW",
+    "carSeatsDetails": {
+      "firstSeat": {
+        "material": "leather",
+        "color": "black"
+      },
+      "secondSeat": {
+        "material": "leather",
+        "color": "white"
+      },
+      "thirdSeat": {
+        "material": "synthetic",
+        "color": "green"
+      },
+      "fourthSeat": {
+        "material": "crocodile leather",
+        "color": "red"
+      }
+    },
+    "carEngine": "3495"
+  },
+  {
+    "carName": "RS7",
+    "carBrand": "Audi",
+    "carSeatsDetails": {
+      "firstSeat": {
+        "material": "leather",
+        "color": "black"
+      },
+      "secondSeat": {
+        "material": "leather",
+        "color": "white"
+      },
+      "thirdSeat": {
+        "material": "synthetic",
+        "color": "red"
+      },
+      "fourthSeat": {
+        "material": "crocodile leather",
+        "color": "green"
+      }
+    },
+    "carEngine": "4570"
+  },
+  {
+    "carName": "S Class",
+    "carBrand": "Mercedes",
+    "carSeatsDetails": {
+      "firstSeat": {
+        "material": "leather",
+        "color": "black"
+      },
+      "secondSeat": {
+        "material": "leather",
+        "color": "white"
+      },
+      "thirdSeat": {
+        "material": "synthetic",
+        "color": "red"
+      },
+      "fourthSeat": {
+        "material": "crocodile leather",
+        "color": "green"
+      }
+    },
+    "carEngine": "6300"
+  }
+]
