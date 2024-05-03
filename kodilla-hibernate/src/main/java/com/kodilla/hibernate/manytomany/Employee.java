@@ -10,6 +10,10 @@ import java.util.List;
         @NamedQuery(
                 name = "Employee.findEmployeesWithLastName",
                 query = "FROM Employee WHERE lastname = :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "Employee.findEmployeesUsingThreeLetters",
+                query = "FROM Employee WHERE lastname LIKE CONCAT('%', :THREELETTERSOFLASTNAME, '%')"
         )
 })
 
